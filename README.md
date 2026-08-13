@@ -17,7 +17,11 @@ pnpm add @volksverpetzer/design-tokens@<version>
 
 Versioning uses [Changesets](https://github.com/changesets/changesets), mirroring `Volksverpetzer/eslint-plugin-react-native-a11y`. Run `pnpm changeset` to describe a change; merging to `main` opens a "Version Packages" PR, and merging that PR publishes to npm.
 
-Publishing needs an `NPM_TOKEN` repo secret — an npm **Automation**-type access token from the account/org that owns the `@volksverpetzer` scope, added via the repo's Settings → Secrets and variables → Actions (or `gh secret set NPM_TOKEN`). Nothing publishes without it; the "Version Packages" PR still opens and can be reviewed either way.
+Publishing to npm uses [Trusted Publishing](https://docs.npmjs.com/trusted-publishers/) (OIDC) — no `NPM_TOKEN` secret, nothing to rotate or leak. The workflow already has the `id-token: write` permission it needs. Two things to know:
+
+- **The first version of each package can't go out via CI.** npm requires a package to already exist before Trusted Publishing can be configured for it, so `@volksverpetzer/design-tokens` and `@volksverpetzer/ui-web` each need one manual `npm publish` (from an account with access to the `@volksverpetzer` scope) before any of this applies.
+- **After that**, go to each package's Settings → Trusted Publisher on npmjs.com and add: repository `Volksverpetzer/vvp_design_system`, workflow file `release.yml`, environment left blank. From then on, `changeset publish` in CI authenticates via OIDC automatically.
+- Stay on pnpm 10.x for this repo (already pinned via `packageManager`) — pnpm 11.0.8+ has a [known regression](https://github.com/pnpm/pnpm/issues/11513) that breaks OIDC publishing (404s). Check that issue before bumping pnpm here.
 
 ## Why tokens only for `vvp_app`
 
