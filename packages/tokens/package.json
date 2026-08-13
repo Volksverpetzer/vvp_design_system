@@ -33,7 +33,7 @@
     "check:ts": "tsc --noEmit -p tsconfig.rn.json"
   },
   "devDependencies": {
-    "style-dictionary": "^4.4.0",
+    "style-dictionary": "^5.5.1",
     "typescript": "^5.9.3"
   }
 }
