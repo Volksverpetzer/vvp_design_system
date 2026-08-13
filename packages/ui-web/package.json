@@ -4,7 +4,8 @@
   "description": "Shared brand-visible React components (Button, Badge, Card) for vvp_link_shortener and vvp_divi5_extensions. Plain, hand-scoped CSS (vvp-ui-* class prefix) consuming the --vvp-* custom properties emitted by @volksverpetzer/design-tokens — no Tailwind classes, so it drops into a Tailwind app and Divi's WordPress-embedded CSS alike.",
   "type": "module",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   },
   "files": [
     "dist"

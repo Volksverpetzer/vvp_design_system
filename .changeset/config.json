@@ -5,7 +5,7 @@
     { "repo": "Volksverpetzer/vvp_design_system" }
   ],
   "commit": false,
-  "access": "restricted",
+  "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
   "ignore": []

@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "description": "Shared design tokens (color, spacing, typography, radii, icon sizes) for Volksverpetzer apps, transformed per-platform via Style Dictionary.",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   },
   "files": [
     "dist"

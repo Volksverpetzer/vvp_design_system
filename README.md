@@ -7,14 +7,7 @@ Shared design tokens and web components for Volksverpetzer's apps:
 
 ## Consuming
 
-Both packages publish to GitHub Packages as `@volksverpetzer/*`. Add to a consumer repo:
-
-```
-# .npmrc
-@volksverpetzer:registry=https://npm.pkg.github.com
-```
-
-Then install a pinned version explicitly — versions are never auto-bumped, consistent with this org's existing caution about un-reviewed dependency updates:
+Both packages publish to the public npm registry as `@volksverpetzer/*` — no `.npmrc` registry mapping or auth needed to install them. Install a pinned version explicitly — versions are never auto-bumped, consistent with this org's existing caution about un-reviewed dependency updates:
 
 ```bash
 pnpm add @volksverpetzer/design-tokens@<version>
@@ -22,7 +15,9 @@ pnpm add @volksverpetzer/design-tokens@<version>
 
 ## Releasing
 
-Versioning uses [Changesets](https://github.com/changesets/changesets), mirroring `Volksverpetzer/eslint-plugin-react-native-a11y`. Run `pnpm changeset` to describe a change; merging to `main` opens a "Version Packages" PR, and merging that PR publishes.
+Versioning uses [Changesets](https://github.com/changesets/changesets), mirroring `Volksverpetzer/eslint-plugin-react-native-a11y`. Run `pnpm changeset` to describe a change; merging to `main` opens a "Version Packages" PR, and merging that PR publishes to npm.
+
+Publishing needs an `NPM_TOKEN` repo secret — an npm **Automation**-type access token from the account/org that owns the `@volksverpetzer` scope, added via the repo's Settings → Secrets and variables → Actions (or `gh secret set NPM_TOKEN`). Nothing publishes without it; the "Version Packages" PR still opens and can be reviewed either way.
 
 ## Why tokens only for `vvp_app`
 
