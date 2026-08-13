@@ -62,3 +62,17 @@
 .vvp-ui-btn--ghost:hover:not(:disabled) {
   background: var(--vvp-surface, #e2f0f5);
 }
+
+/*
+ * For donation/campaign CTAs, where the pink brand accent (not primary
+ * blue) is the call-to-action color — e.g. vvp_divi5_extensions's
+ * campaign-donate module and the crowdfunding site's donate button.
+ */
+.vvp-ui-btn--accent {
+  background: var(--vvp-accent, #db2685);
+  color: var(--vvp-on-primary, #fff);
+}
+
+.vvp-ui-btn--accent:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--vvp-accent, #db2685) 85%, black);
+}
