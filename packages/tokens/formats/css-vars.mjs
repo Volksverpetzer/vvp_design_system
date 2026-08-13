@@ -1,0 +1,30 @@
+/**
+ * Emits `:root { --color-x: ...; }` and `.dark { --color-x: ...; }` blocks
+ * from a color dictionary shaped `color.<light|dark>.<key>`.
+ */
+export function cssColorVars({ dictionary }) {
+  const byMode = { light: [], dark: [] };
+
+  for (const token of dictionary.allTokens) {
+    const mode = token.path[1];
+    const key = token.path[token.path.length - 1];
+    const cssName = key.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+    byMode[mode].push(`  --vvp-${cssName}: ${token.original.$value};`);
+  }
+
+  return `:root {\n${byMode.light.join("\n")}\n}\n\n.dark {\n${byMode.dark.join("\n")}\n}\n`;
+}
+
+/**
+ * Emits flat `:root { --vvp-spacing-x: ...px; }` style variables from a
+ * non-color scale dictionary (spacing, radius, icon-size, font-size).
+ */
+export function cssScaleVars({ dictionary, options }) {
+  const { prefix, unit } = options;
+  const lines = dictionary.allTokens.map((token) => {
+    const key = token.path[token.path.length - 1];
+    const cssName = key.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+    return `  --vvp-${prefix}-${cssName}: ${token.original.$value}${unit ?? ""};`;
+  });
+  return `:root {\n${lines.join("\n")}\n}\n`;
+}

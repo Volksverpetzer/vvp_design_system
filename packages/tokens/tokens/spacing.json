@@ -1,0 +1,12 @@
+{
+  "spacing": {
+    "xs": { "$value": 4, "$type": "dimension", "$description": "Tightest: icon/dot gaps, inline chip spacing." },
+    "sm": { "$value": 8, "$type": "dimension", "$description": "Small gap between closely related elements." },
+    "md": { "$value": 10, "$type": "dimension", "$description": "Default gap/padding — the app's most common spacing unit." },
+    "lg": { "$value": 16, "$type": "dimension", "$description": "Card padding, section spacing." },
+    "xl": { "$value": 20, "$type": "dimension", "$description": "Major content grouping, screen padding." },
+    "xxl": { "$value": 24, "$type": "dimension", "$description": "Large section spacing." },
+    "xxxl": { "$value": 30, "$type": "dimension", "$description": "Hero/CTA padding." },
+    "huge": { "$value": 40, "$type": "dimension", "$description": "Empty-state illustrations, big vertical rhythm." }
+  }
+}

@@ -1,0 +1,168 @@
+import StyleDictionary from "style-dictionary";
+
+import { rnTsConst, rnFontSizes, rnIconSizes, rnColorScheme } from "./formats/rn-ts-const.mjs";
+import { cssColorVars, cssScaleVars } from "./formats/css-vars.mjs";
+import { scssBrandVars } from "./formats/scss-vars.mjs";
+
+StyleDictionary.registerFormat({ name: "rn/ts-const", format: rnTsConst });
+StyleDictionary.registerFormat({ name: "rn/font-sizes", format: rnFontSizes });
+StyleDictionary.registerFormat({ name: "rn/icon-sizes", format: rnIconSizes });
+StyleDictionary.registerFormat({ name: "rn/color-scheme", format: rnColorScheme });
+StyleDictionary.registerFormat({ name: "css/color-vars", format: cssColorVars });
+StyleDictionary.registerFormat({ name: "css/scale-vars", format: cssScaleVars });
+StyleDictionary.registerFormat({ name: "scss/brand-vars", format: scssBrandVars });
+
+const SPACING_HEADER = `Central spacing scale for the app.
+
+Every margin/padding/gap value should come from this scale so vertical and
+horizontal rhythm reads as one system. The steps aren't a strict arithmetic
+progression — 10 and 20 are the app's most common values, so the scale keeps
+those two fixed and folds everything else onto its nearest neighbour.
+
+Source of truth: vvp_design_system/packages/tokens/tokens/spacing.json`;
+
+const RADIUS_HEADER = `Central corner-radius scale for the app.
+
+Every rounded corner should come from this scale so surfaces read as one
+system. Not for circles and pills — those derive their radius from their own
+size, not from this scale.
+
+Source of truth: vvp_design_system/packages/tokens/tokens/radius.json`;
+
+const ICON_SIZE_HEADER = `Central icon-size scale for the app.
+
+Every icon \`size\` prop should come from this scale so icons read as one
+system alongside \`radii\`/\`fontSizes\`/\`spacing\`.
+
+Source of truth: vvp_design_system/packages/tokens/tokens/icon-size.json`;
+
+const FONT_SIZE_HEADER = `Central font-size scale for the app.
+
+Every text size should come from this scale so the typographic hierarchy
+stays consistent and auditable.
+
+Source of truth: vvp_design_system/packages/tokens/tokens/font-size.json`;
+
+async function buildScale({ source, exportName, typeName, headerText, rnFile, cssPrefix, cssUnit }) {
+  const sd = new StyleDictionary({
+    usesDtcg: true,
+    source: [source],
+    platforms: {
+      rn: {
+        transformGroup: "js",
+        buildPath: "gen-rn/rn/shared/",
+        files: [
+          {
+            destination: rnFile,
+            format: "rn/ts-const",
+            options: { exportName, typeName, headerText },
+          },
+        ],
+      },
+      css: {
+        transformGroup: "css",
+        buildPath: "dist/css/",
+        files: [
+          {
+            destination: `${cssPrefix}.css`,
+            format: "css/scale-vars",
+            options: { prefix: cssPrefix, unit: cssUnit ?? "" },
+          },
+        ],
+      },
+    },
+  });
+  await sd.buildAllPlatforms();
+}
+
+async function buildColorBrand(brand) {
+  const sd = new StyleDictionary({
+    usesDtcg: true,
+    source: [`tokens/color/${brand}.json`],
+    platforms: {
+      rn: {
+        transformGroup: "js",
+        buildPath: `gen-rn/rn/${brand}/`,
+        files: [{ destination: "Colors.ts", format: "rn/color-scheme", options: { exportName: "colorScheme" } }],
+      },
+      css: {
+        transformGroup: "css",
+        buildPath: "dist/css/",
+        files: [{ destination: `${brand}.css`, format: "css/color-vars" }],
+      },
+      scss: {
+        transformGroup: "css",
+        buildPath: "dist/scss/",
+        files: [{ destination: `${brand}.scss`, format: "scss/brand-vars" }],
+      },
+    },
+  });
+  await sd.buildAllPlatforms();
+}
+
+async function buildIconSizes() {
+  const sd = new StyleDictionary({
+    usesDtcg: true,
+    source: ["tokens/icon-size.json"],
+    platforms: {
+      rn: {
+        transformGroup: "js",
+        buildPath: "gen-rn/rn/shared/",
+        files: [{ destination: "IconSizes.ts", format: "rn/icon-sizes", options: { headerText: ICON_SIZE_HEADER } }],
+      },
+      css: {
+        transformGroup: "css",
+        buildPath: "dist/css/",
+        files: [{ destination: "icon-size.css", format: "css/scale-vars", options: { prefix: "icon-size", unit: "px" } }],
+      },
+    },
+  });
+  await sd.buildAllPlatforms();
+}
+
+async function buildFontSizes() {
+  const sd = new StyleDictionary({
+    usesDtcg: true,
+    source: ["tokens/font-size.json"],
+    platforms: {
+      rn: {
+        transformGroup: "js",
+        buildPath: "gen-rn/rn/shared/",
+        files: [{ destination: "FontSizes.ts", format: "rn/font-sizes", options: { headerText: FONT_SIZE_HEADER } }],
+      },
+      css: {
+        transformGroup: "css",
+        buildPath: "dist/css/",
+        files: [{ destination: "font-size.css", format: "css/scale-vars", options: { prefix: "font-size", unit: "px" } }],
+      },
+    },
+  });
+  await sd.buildAllPlatforms();
+}
+
+await buildScale({
+  source: "tokens/spacing.json",
+  exportName: "spacing",
+  typeName: "SpacingToken",
+  headerText: SPACING_HEADER,
+  rnFile: "Spacing.ts",
+  cssPrefix: "spacing",
+  cssUnit: "px",
+});
+
+await buildScale({
+  source: "tokens/radius.json",
+  exportName: "radii",
+  typeName: "RadiusToken",
+  headerText: RADIUS_HEADER,
+  rnFile: "BorderRadius.ts",
+  cssPrefix: "radius",
+  cssUnit: "px",
+});
+
+await buildIconSizes();
+await buildFontSizes();
+await buildColorBrand("volksverpetzer");
+await buildColorBrand("mimikama");
+
+console.log("Tokens built.");

@@ -1,0 +1,14 @@
+{
+  "iconSize": {
+    "xs": { "$value": 16, "$type": "dimension", "$description": "Inline/badge icons: info dots, small counters." },
+    "sm": { "$value": 20, "$type": "dimension", "$description": "Small UI icons: upload/download, list chevrons." },
+    "md": { "$value": 24, "$type": "dimension", "$description": "Default icon size — nav bars, list rows, buttons." },
+    "lg": { "$value": 32, "$type": "dimension", "$description": "Prominent icons: modal close buttons, statistics." },
+    "xl": { "$value": 56, "$type": "dimension", "$description": "Hero icons: empty states, large play/heart buttons." }
+  },
+  "minTouchTarget": {
+    "$value": 44,
+    "$type": "dimension",
+    "$description": "Minimum touch target per Apple HIG (44pt) / Material (48dp) guidance."
+  }
+}

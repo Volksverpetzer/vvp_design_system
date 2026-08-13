@@ -1,0 +1,9 @@
+.vvp-ui-card {
+  background: var(--vvp-background, #fff);
+  border-radius: var(--vvp-radius-md, 12px);
+  padding: var(--vvp-spacing-lg, 16px);
+}
+
+.vvp-ui-card--bordered {
+  border: 1px solid var(--vvp-surface-input, #badde8);
+}

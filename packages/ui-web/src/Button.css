@@ -1,0 +1,64 @@
+.vvp-ui-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--vvp-spacing-sm, 8px);
+  border: none;
+  border-radius: var(--vvp-radius-full, 9999px);
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  line-height: 1;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.vvp-ui-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.vvp-ui-btn--sm {
+  padding: var(--vvp-spacing-sm, 8px) var(--vvp-spacing-lg, 16px);
+  font-size: var(--vvp-font-size-sm, 14px);
+}
+
+.vvp-ui-btn--md {
+  padding: var(--vvp-spacing-md, 10px) var(--vvp-spacing-xl, 20px);
+  font-size: var(--vvp-font-size-base, 16px);
+}
+
+.vvp-ui-btn--lg {
+  padding: var(--vvp-spacing-lg, 16px) var(--vvp-spacing-xxl, 24px);
+  font-size: var(--vvp-font-size-lg, 18px);
+}
+
+.vvp-ui-btn--primary {
+  background: var(--vvp-primary, #1b7194);
+  color: var(--vvp-on-primary, #fff);
+}
+
+.vvp-ui-btn--primary:hover:not(:disabled) {
+  background: var(--vvp-primary-muted, #3893c0);
+}
+
+.vvp-ui-btn--secondary {
+  background: var(--vvp-surface, #e2f0f5);
+  color: var(--vvp-text, #111);
+}
+
+.vvp-ui-btn--secondary:hover:not(:disabled) {
+  background: var(--vvp-surface-input, #badde8);
+}
+
+.vvp-ui-btn--ghost {
+  background: transparent;
+  color: var(--vvp-primary, #1b7194);
+  border: 2px solid var(--vvp-primary, #1b7194);
+}
+
+.vvp-ui-btn--ghost:hover:not(:disabled) {
+  background: var(--vvp-surface, #e2f0f5);
+}

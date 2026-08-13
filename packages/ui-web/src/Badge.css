@@ -1,0 +1,29 @@
+.vvp-ui-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--vvp-radius-full, 9999px);
+  padding: var(--vvp-spacing-xs, 4px) var(--vvp-spacing-sm, 8px);
+  font-size: var(--vvp-font-size-xs, 12px);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.vvp-ui-badge--primary {
+  background: var(--vvp-primary, #1b7194);
+  color: var(--vvp-on-primary, #fff);
+}
+
+.vvp-ui-badge--accent {
+  background: var(--vvp-accent, #db2685);
+  color: var(--vvp-on-primary, #fff);
+}
+
+.vvp-ui-badge--neutral {
+  background: var(--vvp-surface, #e2f0f5);
+  color: var(--vvp-text-muted, #666);
+}
+
+.vvp-ui-badge--error {
+  background: var(--vvp-error, #c62828);
+  color: var(--vvp-on-error, #fff);
+}

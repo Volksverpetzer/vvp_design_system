@@ -1,0 +1,11 @@
+{
+  "radius": {
+    "xs": { "$value": 4, "$type": "dimension", "$description": "Checkboxes, badge corners, small tappable chips." },
+    "sm": { "$value": 8, "$type": "dimension", "$description": "Small inline surfaces: list buttons, notice boxes." },
+    "md": { "$value": 12, "$type": "dimension", "$description": "Default for cards, buttons and images." },
+    "lg": { "$value": 16, "$type": "dimension", "$description": "Larger content cards and centred modals." },
+    "xl": { "$value": 20, "$type": "dimension", "$description": "Prominent cards, tab bars, bottom-sheet tops." },
+    "xxl": { "$value": 24, "$type": "dimension", "$description": "Hero surfaces: stats panel, map sheet." },
+    "full": { "$value": 9999, "$type": "dimension", "$description": "Fully rounded — pills and circles whose size isn't known up front." }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "fontSize": {
+    "xs": { "$value": 12, "$type": "dimension", "$description": "Fine print: metadata, timestamps, tiny map labels.", "$extensions": { "lineHeight": 16 } },
+    "sm": { "$value": 14, "$type": "dimension", "$description": "Captions, secondary/greyed labels, figure captions.", "$extensions": { "lineHeight": 19 } },
+    "base": { "$value": 16, "$type": "dimension", "$description": "Default body text. The baseline of the hierarchy.", "$extensions": { "lineHeight": 22 } },
+    "lg": { "$value": 18, "$type": "dimension", "$description": "Emphasised body: social-post fulltext, inputs, headings.", "$extensions": { "lineHeight": 24 } },
+    "xl": { "$value": 20, "$type": "dimension", "$description": "Section titles.", "$extensions": { "lineHeight": 27 } },
+    "xxl": { "$value": 24, "$type": "dimension", "$description": "Largest step: screen/article titles and article sub-headings (h2–h5).", "$extensions": { "lineHeight": 32 } },
+    "xxxl": { "$value": 30, "$type": "dimension", "$description": "Above the regular hierarchy: standalone statement headlines (e.g. Support).", "$extensions": { "lineHeight": 40 } }
+  },
+  "contentLineHeight": {
+    "$value": 27,
+    "$type": "dimension",
+    "$description": "Line height for readable body copy — article body, social-post fulltext. The article body is the reference; keep other long-form content in sync with it via this token."
+  }
+}

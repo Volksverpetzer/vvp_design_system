@@ -1,0 +1,34 @@
+{
+  "color": {
+    "light": {
+      "background": { "$value": "#FFF", "$type": "color" },
+      "surface": { "$value": "#E2F0F5", "$type": "color" },
+      "surfaceInput": { "$value": "#BADDE8", "$type": "color" },
+      "surfaceDisabled": { "$value": "#DDD", "$type": "color" },
+      "surfaceError": { "$value": "#C62828", "$type": "color" },
+      "text": { "$value": "#111", "$type": "color" },
+      "textMuted": { "$value": "#666", "$type": "color" },
+      "onPrimary": { "$value": "#FFF", "$type": "color" },
+      "onError": { "$value": "#FFF", "$type": "color" },
+      "primary": { "$value": "#1B7194", "$type": "color" },
+      "primaryMuted": { "$value": "#3893C0", "$type": "color" },
+      "accent": { "$value": "#DB2685", "$type": "color" },
+      "error": { "$value": "#C62828", "$type": "color" }
+    },
+    "dark": {
+      "background": { "$value": "#050D0f", "$type": "color" },
+      "surface": { "$value": "#142228", "$type": "color" },
+      "surfaceInput": { "$value": "#555", "$type": "color" },
+      "surfaceDisabled": { "$value": "#333", "$type": "color" },
+      "surfaceError": { "$value": "#7F1D1D", "$type": "color" },
+      "text": { "$value": "#F7F7F7", "$type": "color" },
+      "textMuted": { "$value": "#AAA", "$type": "color" },
+      "onPrimary": { "$value": "#FFF", "$type": "color" },
+      "onError": { "$value": "#FEE2E2", "$type": "color" },
+      "primary": { "$value": "#3893C0", "$type": "color" },
+      "primaryMuted": { "$value": "#1B7194", "$type": "color" },
+      "accent": { "$value": "#D31C74", "$type": "color" },
+      "error": { "$value": "#EF5350", "$type": "color" }
+    }
+  }
+}

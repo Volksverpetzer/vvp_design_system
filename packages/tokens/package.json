@@ -1,0 +1,38 @@
+{
+  "name": "@volksverpetzer/design-tokens",
+  "version": "0.1.0",
+  "description": "Shared design tokens (color, spacing, typography, radii, icon sizes) for Volksverpetzer apps, transformed per-platform via Style Dictionary.",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    "./rn/shared": {
+      "types": "./dist/rn/shared/index.d.ts",
+      "default": "./dist/rn/shared/index.js"
+    },
+    "./rn/volksverpetzer": {
+      "types": "./dist/rn/volksverpetzer/index.d.ts",
+      "default": "./dist/rn/volksverpetzer/index.js"
+    },
+    "./rn/mimikama": {
+      "types": "./dist/rn/mimikama/index.d.ts",
+      "default": "./dist/rn/mimikama/index.js"
+    },
+    "./css/volksverpetzer.css": "./dist/css/volksverpetzer.css",
+    "./css/mimikama.css": "./dist/css/mimikama.css",
+    "./css/*.css": "./dist/css/*.css",
+    "./scss/volksverpetzer.scss": "./dist/scss/volksverpetzer.scss",
+    "./scss/mimikama.scss": "./dist/scss/mimikama.scss"
+  },
+  "scripts": {
+    "build": "node build.mjs && node scripts/write-index-files.mjs && tsc -p tsconfig.rn.json",
+    "check:ts": "tsc --noEmit -p tsconfig.rn.json"
+  },
+  "devDependencies": {
+    "style-dictionary": "^4.4.0",
+    "typescript": "^5.9.3"
+  }
+}
