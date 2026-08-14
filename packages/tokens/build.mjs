@@ -43,34 +43,53 @@ stays consistent and auditable.
 
 Source of truth: vvp_design_system/packages/tokens/tokens/font-size.json`;
 
-async function buildScale({ source, exportName, typeName, headerText, rnFile, cssPrefix, cssUnit }) {
+async function buildScale({ source, exportName, typeName, headerText, rnFile, cssPrefix, cssUnit, scss = false }) {
+  const platforms = {
+    rn: {
+      transformGroup: "js",
+      buildPath: "gen-rn/rn/shared/",
+      files: [
+        {
+          destination: rnFile,
+          format: "rn/ts-const",
+          options: { exportName, typeName, headerText },
+        },
+      ],
+    },
+    css: {
+      transformGroup: "css",
+      buildPath: "dist/css/",
+      files: [
+        {
+          destination: `${cssPrefix}.css`,
+          format: "css/scale-vars",
+          options: { prefix: cssPrefix, unit: cssUnit ?? "" },
+        },
+      ],
+    },
+  };
+
+  // Sass doesn't inline `@import "foo.css"` at build time (it passes it
+  // through as a literal runtime CSS import instead) — consumers that want
+  // this scale via Sass (e.g. vvp_divi5_extensions) need a real .scss file.
+  if (scss) {
+    platforms.scss = {
+      transformGroup: "css",
+      buildPath: "dist/scss/",
+      files: [
+        {
+          destination: `${cssPrefix}.scss`,
+          format: "css/scale-vars",
+          options: { prefix: cssPrefix, unit: cssUnit ?? "" },
+        },
+      ],
+    };
+  }
+
   const sd = new StyleDictionary({
     usesDtcg: true,
     source: [source],
-    platforms: {
-      rn: {
-        transformGroup: "js",
-        buildPath: "gen-rn/rn/shared/",
-        files: [
-          {
-            destination: rnFile,
-            format: "rn/ts-const",
-            options: { exportName, typeName, headerText },
-          },
-        ],
-      },
-      css: {
-        transformGroup: "css",
-        buildPath: "dist/css/",
-        files: [
-          {
-            destination: `${cssPrefix}.css`,
-            format: "css/scale-vars",
-            options: { prefix: cssPrefix, unit: cssUnit ?? "" },
-          },
-        ],
-      },
-    },
+    platforms,
   });
   await sd.buildAllPlatforms();
 }
@@ -158,6 +177,7 @@ await buildScale({
   rnFile: "BorderRadius.ts",
   cssPrefix: "radius",
   cssUnit: "px",
+  scss: true,
 });
 
 await buildIconSizes();

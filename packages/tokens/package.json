@@ -31,7 +31,8 @@
     "./css/mimikama.css": "./dist/css/mimikama.css",
     "./css/*.css": "./dist/css/*.css",
     "./scss/volksverpetzer.scss": "./dist/scss/volksverpetzer.scss",
-    "./scss/mimikama.scss": "./dist/scss/mimikama.scss"
+    "./scss/mimikama.scss": "./dist/scss/mimikama.scss",
+    "./scss/radius.scss": "./dist/scss/radius.scss"
   },
   "scripts": {
     "build": "node build.mjs && node scripts/write-index-files.mjs && tsc -p tsconfig.rn.json",
