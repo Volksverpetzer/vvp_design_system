@@ -2,6 +2,11 @@
   "name": "@volksverpetzer/design-tokens",
   "version": "0.1.0",
   "description": "Shared design tokens (color, spacing, typography, radii, icon sizes) for Volksverpetzer apps, transformed per-platform via Style Dictionary.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Volksverpetzer/vvp_design_system.git",
+    "directory": "packages/tokens"
+  },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
