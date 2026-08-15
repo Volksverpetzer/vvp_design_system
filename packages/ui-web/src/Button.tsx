@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from "react";
 
 import "./Button.css";
 
@@ -17,14 +17,17 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
  * responsible for loading a brand's token CSS (or SCSS, for Divi) before
  * this renders.
  */
-export function Button({ variant = "primary", size = "md", className, children, ...rest }: ButtonProps) {
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+  { variant = "primary", size = "md", className, children, ...rest },
+  ref
+) {
   const classes = ["vvp-ui-btn", `vvp-ui-btn--${variant}`, `vvp-ui-btn--${size}`, className]
     .filter(Boolean)
     .join(" ");
 
   return (
-    <button className={classes} {...rest}>
+    <button ref={ref} className={classes} {...rest}>
       {children}
     </button>
   );
-}
+});
