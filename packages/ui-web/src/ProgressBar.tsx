@@ -39,7 +39,7 @@ export function ProgressBar({ total, goal, milestones, className, ...rest }: Pro
     const filled = Math.min(Math.max(total - start, 0), range);
     const percent = range > 0 ? Math.min(100, (filled / range) * 100) : 0;
     const width = target > 0 ? (range / target) * 100 : 0;
-    return { ...step, start, percent, width };
+    return { ...step, start, range, filled, percent, width };
   });
 
   const classes = ["vvp-ui-progress", className].filter(Boolean).join(" ");
@@ -67,7 +67,11 @@ export function ProgressBar({ total, goal, milestones, className, ...rest }: Pro
                 aria-valuemin={segment.start}
                 aria-valuemax={segment.value}
                 aria-valuenow={valueNow}
-                aria-valuetext={`${formatEuro(valueNow)} von ${formatEuro(segment.value)}`}
+                aria-valuetext={
+                  isSingleStep
+                    ? `${formatEuro(total)} von ${formatEuro(goal)}`
+                    : `${formatEuro(total)} insgesamt gesammelt, ${formatEuro(segment.filled)} von ${formatEuro(segment.range)} für „${segment.label}“`
+                }
                 aria-label={
                   isSingleStep
                     ? `${formatEuro(total)} von ${formatEuro(goal)} gesammelt`
