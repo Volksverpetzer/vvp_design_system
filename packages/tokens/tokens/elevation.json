@@ -1,0 +1,20 @@
+{
+  "elevation": {
+    "xs": {
+      "$value": { "offsetY": 1, "blur": 1.41, "opacity": 0.2, "android": 2 },
+      "$description": "Subtle lift for cards and list rows resting just above the background."
+    },
+    "sm": {
+      "$value": { "offsetY": 2, "blur": 4, "opacity": 0.25, "android": 4 },
+      "$description": "Floating controls: back-to-top button, floating action buttons."
+    },
+    "md": {
+      "$value": { "offsetY": 4, "blur": 10, "opacity": 0.3, "android": 8 },
+      "$description": "Overlays sitting above page content: dropdowns, popovers, sheets."
+    },
+    "lg": {
+      "$value": { "offsetY": 8, "blur": 20, "opacity": 0.35, "android": 16 },
+      "$description": "Modals and dialogs — the highest standard elevation step."
+    }
+  }
+}

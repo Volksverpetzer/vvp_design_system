@@ -2,7 +2,7 @@
 
 Shared design tokens and web components for Volksverpetzer's apps:
 
-- [`packages/tokens`](packages/tokens) — `@volksverpetzer/design-tokens`. Single source of truth for colors (per brand, per light/dark), spacing, font sizes, radii, and icon sizes, transformed via [Style Dictionary](https://styledictionary.com/) into platform-native output: a React Native/TypeScript module for `vvp_app`, CSS custom properties for `vvp_link_shortener`, and Sass custom properties for `vvp_divi5_extensions`.
+- [`packages/tokens`](packages/tokens) — `@volksverpetzer/design-tokens`. Single source of truth for colors (per brand, per light/dark), spacing, font sizes, radii, icon sizes, and elevation/shadow, transformed via [Style Dictionary](https://styledictionary.com/) into platform-native output: a React Native/TypeScript module for `vvp_app`, CSS custom properties for `vvp_link_shortener`, and Sass custom properties for `vvp_divi5_extensions`.
 - [`packages/ui-web`](packages/ui-web) — `@volksverpetzer/ui-web`. A small set of brand-visible React components (Button, Badge, Card) shared between `vvp_link_shortener` and `vvp_divi5_extensions`. Built with plain, hand-scoped CSS (`vvp-ui-*` class prefix, no Tailwind utility classes and no build-time CSS Modules tooling) so they drop into both a Tailwind app and Divi's WordPress-embedded CSS without conflict. Not usable from `vvp_app` — React Native has no CSS/DOM.
 
 ## Consuming

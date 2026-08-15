@@ -6,6 +6,7 @@ writeFileSync(
 export * from "./FontSizes";
 export * from "./BorderRadius";
 export * from "./IconSizes";
+export * from "./Elevation";
 `,
 );
 

@@ -99,6 +99,42 @@ export const MIN_TOUCH_TARGET = ${minTouchTarget.original.$value};
 }
 
 /**
+ * Emits an elevation object shaped `{ offsetY, blur, opacity, android,
+ * boxShadow }` per step — `boxShadow` is the ready-to-use RN "New
+ * Architecture" CSS-like box-shadow string (see React Native's `boxShadow`
+ * View style prop), pre-assembled so consumers don't hand-template it. Pair
+ * with the step's `android` field for the legacy Android `elevation` prop.
+ * Color is always neutral black — brand-colored shadows are a local,
+ * app-specific choice, not part of this scale.
+ */
+export function rnElevation({ dictionary, options }) {
+  const { headerText } = options;
+  const steps = dictionary.allTokens.filter((t) => t.path[0] === "elevation");
+
+  const lines = steps.map((t) => {
+    const key = t.path[t.path.length - 1];
+    const { offsetY, blur, opacity, android } = t.original.$value;
+    const desc = t.original.$description ? `  /** ${t.original.$description} */\n` : "";
+    return `${desc}  ${key}: {
+    offsetY: ${offsetY},
+    blur: ${blur},
+    opacity: ${opacity},
+    android: ${android},
+    boxShadow: "0px ${offsetY}px ${blur}px rgba(0, 0, 0, ${opacity})",
+  },`;
+  });
+
+  const header = headerText ? `/**\n${headerText.split("\n").map((l) => ` * ${l}`).join("\n")}\n */\n` : "";
+
+  return `${header}export const elevation = {
+${lines.join("\n")}
+} as const;
+
+export type ElevationToken = keyof typeof elevation;
+`;
+}
+
+/**
  * Emits a colorScheme object shaped `{ light: {...}, dark: {...} }`,
  * matching vvp_app's `colorSchemeType`.
  */

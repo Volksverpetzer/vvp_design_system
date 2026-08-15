@@ -1,15 +1,17 @@
 import StyleDictionary from "style-dictionary";
 
-import { rnTsConst, rnFontSizes, rnIconSizes, rnColorScheme } from "./formats/rn-ts-const.mjs";
-import { cssColorVars, cssScaleVars } from "./formats/css-vars.mjs";
+import { rnTsConst, rnFontSizes, rnIconSizes, rnElevation, rnColorScheme } from "./formats/rn-ts-const.mjs";
+import { cssColorVars, cssScaleVars, cssElevationVars } from "./formats/css-vars.mjs";
 import { scssBrandVars } from "./formats/scss-vars.mjs";
 
 StyleDictionary.registerFormat({ name: "rn/ts-const", format: rnTsConst });
 StyleDictionary.registerFormat({ name: "rn/font-sizes", format: rnFontSizes });
 StyleDictionary.registerFormat({ name: "rn/icon-sizes", format: rnIconSizes });
+StyleDictionary.registerFormat({ name: "rn/elevation", format: rnElevation });
 StyleDictionary.registerFormat({ name: "rn/color-scheme", format: rnColorScheme });
 StyleDictionary.registerFormat({ name: "css/color-vars", format: cssColorVars });
 StyleDictionary.registerFormat({ name: "css/scale-vars", format: cssScaleVars });
+StyleDictionary.registerFormat({ name: "css/elevation-vars", format: cssElevationVars });
 StyleDictionary.registerFormat({ name: "scss/brand-vars", format: scssBrandVars });
 
 const SPACING_HEADER = `Central spacing scale for the app.
@@ -146,6 +148,35 @@ async function buildIconSizes() {
   await sd.buildAllPlatforms();
 }
 
+const ELEVATION_HEADER = `Central elevation/shadow scale for the app.
+
+Every drop-shadow should come from this scale so surfaces read as one
+consistent depth system. Color is always neutral black — a brand-colored
+shadow (e.g. a pink CTA glow) is a local, one-off design choice, not part of
+this scale, and should stay hand-written at the call site.
+
+Source of truth: vvp_design_system/packages/tokens/tokens/elevation.json`;
+
+async function buildElevation() {
+  const sd = new StyleDictionary({
+    usesDtcg: true,
+    source: ["tokens/elevation.json"],
+    platforms: {
+      rn: {
+        transformGroup: "js",
+        buildPath: "gen-rn/rn/shared/",
+        files: [{ destination: "Elevation.ts", format: "rn/elevation", options: { headerText: ELEVATION_HEADER } }],
+      },
+      css: {
+        transformGroup: "css",
+        buildPath: "dist/css/",
+        files: [{ destination: "elevation.css", format: "css/elevation-vars" }],
+      },
+    },
+  });
+  await sd.buildAllPlatforms();
+}
+
 async function buildFontSizes() {
   const sd = new StyleDictionary({
     usesDtcg: true,
@@ -189,6 +220,7 @@ await buildScale({
 
 await buildIconSizes();
 await buildFontSizes();
+await buildElevation();
 await buildColorBrand("volksverpetzer");
 await buildColorBrand("mimikama");
 
