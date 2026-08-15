@@ -1,0 +1,82 @@
+.vvp-ui-progress {
+  width: 100%;
+  text-align: center;
+}
+
+.vvp-ui-progress__amounts {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: var(--vvp-spacing-sm, 8px);
+  margin-bottom: var(--vvp-spacing-sm, 8px);
+  flex-wrap: wrap;
+}
+
+.vvp-ui-progress__total {
+  font-weight: 700;
+  font-size: var(--vvp-font-size-xxl, 24px);
+  line-height: 1.2;
+}
+
+.vvp-ui-progress__goal {
+  font-size: var(--vvp-font-size-sm, 14px);
+  color: var(--vvp-text-muted, #666);
+}
+
+.vvp-ui-progress__track-row {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  gap: 0;
+}
+
+.vvp-ui-progress__step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--vvp-spacing-xs, 4px);
+  min-width: 0;
+}
+
+.vvp-ui-progress__track {
+  width: 100%;
+  height: 24px;
+  background: var(--vvp-surface-disabled, #ddd);
+  border: 1px solid var(--vvp-surface-input, #badde8);
+  overflow: hidden;
+  position: relative;
+}
+
+.vvp-ui-progress__step:first-child .vvp-ui-progress__track {
+  border-top-left-radius: var(--vvp-radius-full, 9999px);
+  border-bottom-left-radius: var(--vvp-radius-full, 9999px);
+}
+
+.vvp-ui-progress__step:last-child .vvp-ui-progress__track {
+  border-top-right-radius: var(--vvp-radius-full, 9999px);
+  border-bottom-right-radius: var(--vvp-radius-full, 9999px);
+}
+
+.vvp-ui-progress__step + .vvp-ui-progress__step .vvp-ui-progress__track {
+  border-left: 0;
+}
+
+.vvp-ui-progress__fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(120deg, var(--vvp-accent, #db2685), color-mix(in srgb, var(--vvp-accent, #db2685) 85%, black));
+  transition: width 300ms ease-out;
+}
+
+.vvp-ui-progress__step-label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-size: var(--vvp-font-size-sm, 14px);
+  color: var(--vvp-text-muted, #666);
+  text-align: right;
+}
+
+.vvp-ui-progress__step-label strong {
+  color: var(--vvp-text, #111);
+}
