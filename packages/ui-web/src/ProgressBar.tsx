@@ -28,7 +28,7 @@ const formatEuro = (value: number): string => value.toLocaleString("de-DE", { mi
  */
 export function ProgressBar({ total, goal, milestones, className, ...rest }: ProgressBarProps) {
   const steps: ProgressBarMilestone[] =
-    milestones && milestones.length > 0 ? [...milestones].sort((a, b) => a.value - b.value) : [{ value: goal, label: "" }];
+    milestones && milestones.length > 1 ? [...milestones].sort((a, b) => a.value - b.value) : [{ value: goal, label: "" }];
   const isSingleStep = steps.length === 1;
   const target = steps[steps.length - 1].value;
 
@@ -63,7 +63,7 @@ export function ProgressBar({ total, goal, milestones, className, ...rest }: Pro
               role="progressbar"
               aria-valuemin={segment.start}
               aria-valuemax={segment.value}
-              aria-valuenow={Math.min(total, segment.value)}
+              aria-valuenow={Math.min(Math.max(total, segment.start), segment.value)}
               aria-label={
                 isSingleStep
                   ? `${formatEuro(total)} von ${formatEuro(goal)} gesammelt`
