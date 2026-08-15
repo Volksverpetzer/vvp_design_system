@@ -2,7 +2,12 @@
 // own `import "./Button.css"` side-effect import resolves at dist/ runtime),
 // and also concatenates everything into dist/styles.css as a single
 // convenience import for consumers that prefer to load styles once.
-import { readdirSync, readFileSync, writeFileSync, copyFileSync } from "node:fs";
+import {
+  readdirSync,
+  readFileSync,
+  writeFileSync,
+  copyFileSync,
+} from "node:fs";
 import { join } from "node:path";
 
 const srcDir = "src";

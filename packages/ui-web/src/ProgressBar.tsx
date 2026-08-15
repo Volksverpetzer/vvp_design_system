@@ -19,7 +19,10 @@ export interface ProgressBarProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const formatEuro = (value: number): string =>
-  value.toLocaleString("de-DE", { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + " €";
+  value.toLocaleString("de-DE", {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }) + " €";
 
 /**
  * Campaign donation progress bar — one segment by default (0 to `goal`), or
@@ -27,9 +30,17 @@ const formatEuro = (value: number): string =>
  * Styled off the `--vvp-*` custom properties emitted by
  * `@volksverpetzer/design-tokens`, same as the other components here.
  */
-export function ProgressBar({ total, goal, milestones, className, ...rest }: ProgressBarProps) {
+export function ProgressBar({
+  total,
+  goal,
+  milestones,
+  className,
+  ...rest
+}: ProgressBarProps) {
   const steps: ProgressBarMilestone[] =
-    milestones && milestones.length > 1 ? [...milestones].sort((a, b) => a.value - b.value) : [{ value: goal, label: "" }];
+    milestones && milestones.length > 1
+      ? [...milestones].sort((a, b) => a.value - b.value)
+      : [{ value: goal, label: "" }];
   const isSingleStep = steps.length === 1;
   const target = steps[steps.length - 1].value;
 
@@ -52,14 +63,25 @@ export function ProgressBar({ total, goal, milestones, className, ...rest }: Pro
           <span className="vvp-ui-progress__goal"> von {formatEuro(goal)}</span>
         </div>
       ) : null}
-      <div className="vvp-ui-progress__track-row" role="group" aria-label="Spendenfortschritt">
+      <div
+        className="vvp-ui-progress__track-row"
+        role="group"
+        aria-label="Spendenfortschritt"
+      >
         {segments.map((segment, index) => {
-          const valueNow = Math.min(Math.max(total, segment.start), segment.value);
+          const valueNow = Math.min(
+            Math.max(total, segment.start),
+            segment.value,
+          );
           return (
             <div
               key={`${segment.value}-${index}`}
               className="vvp-ui-progress__step"
-              style={{ flexBasis: `${segment.width}%`, flexGrow: segment.width, flexShrink: 0 }}
+              style={{
+                flexBasis: `${segment.width}%`,
+                flexGrow: segment.width,
+                flexShrink: 0,
+              }}
             >
               <div
                 className="vvp-ui-progress__track"
@@ -78,7 +100,10 @@ export function ProgressBar({ total, goal, milestones, className, ...rest }: Pro
                     : `${segment.label} (${formatEuro(segment.value)})`
                 }
               >
-                <div className="vvp-ui-progress__fill" style={{ width: `${segment.percent}%` }} />
+                <div
+                  className="vvp-ui-progress__fill"
+                  style={{ width: `${segment.percent}%` }}
+                />
               </div>
               {!isSingleStep ? (
                 <div className="vvp-ui-progress__step-label">
