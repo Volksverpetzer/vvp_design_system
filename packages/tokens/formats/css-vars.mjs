@@ -28,3 +28,19 @@ export function cssScaleVars({ dictionary, options }) {
   });
   return `:root {\n${lines.join("\n")}\n}\n`;
 }
+
+/**
+ * Emits ready-to-use `:root { --vvp-elevation-x: 0px Ypx Bpx rgba(...); }`
+ * box-shadow values (one property per step, not decomposed) — used directly
+ * as `box-shadow: var(--vvp-elevation-x)`. Color is always neutral black;
+ * brand-colored shadows are a local, app-specific choice, not part of this
+ * scale.
+ */
+export function cssElevationVars({ dictionary }) {
+  const lines = dictionary.allTokens.map((token) => {
+    const key = token.path[token.path.length - 1];
+    const { offsetY, blur, opacity } = token.original.$value;
+    return `  --vvp-elevation-${key}: 0px ${offsetY}px ${blur}px rgba(0, 0, 0, ${opacity});`;
+  });
+  return `:root {\n${lines.join("\n")}\n}\n`;
+}
