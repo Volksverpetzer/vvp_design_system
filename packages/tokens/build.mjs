@@ -107,7 +107,14 @@ async function buildColorBrand(brand) {
       css: {
         transformGroup: "css",
         buildPath: "dist/css/",
-        files: [{ destination: `${brand}.css`, format: "css/color-vars" }],
+        files: [
+          { destination: `${brand}.css`, format: "css/color-vars" },
+          // Same --vvp-color-* names + --brand-* override wrapper as the
+          // .scss export below, just as plain CSS — for consumers that
+          // need the WP-admin-overridable form without using Sass (e.g.
+          // vvp_divi5_extensions, after it dropped Sass).
+          { destination: `${brand}-brand.css`, format: "scss/brand-vars" },
+        ],
       },
       scss: {
         transformGroup: "css",

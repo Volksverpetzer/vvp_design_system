@@ -29,6 +29,8 @@
     },
     "./css/volksverpetzer.css": "./dist/css/volksverpetzer.css",
     "./css/mimikama.css": "./dist/css/mimikama.css",
+    "./css/volksverpetzer-brand.css": "./dist/css/volksverpetzer-brand.css",
+    "./css/mimikama-brand.css": "./dist/css/mimikama-brand.css",
     "./css/*.css": "./dist/css/*.css",
     "./scss/volksverpetzer.scss": "./dist/scss/volksverpetzer.scss",
     "./scss/mimikama.scss": "./dist/scss/mimikama.scss",
