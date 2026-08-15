@@ -18,7 +18,8 @@ export interface ProgressBarProps extends HTMLAttributes<HTMLDivElement> {
   milestones?: ProgressBarMilestone[];
 }
 
-const formatEuro = (value: number): string => value.toLocaleString("de-DE", { minimumFractionDigits: 0 }) + " €";
+const formatEuro = (value: number): string =>
+  value.toLocaleString("de-DE", { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + " €";
 
 /**
  * Campaign donation progress bar — one segment by default (0 to `goal`), or
@@ -52,34 +53,38 @@ export function ProgressBar({ total, goal, milestones, className, ...rest }: Pro
         </div>
       ) : null}
       <div className="vvp-ui-progress__track-row" role="group" aria-label="Spendenfortschritt">
-        {segments.map((segment) => (
-          <div
-            key={segment.value}
-            className="vvp-ui-progress__step"
-            style={{ flexBasis: `${segment.width}%`, flexGrow: segment.width, flexShrink: 0 }}
-          >
+        {segments.map((segment, index) => {
+          const valueNow = Math.min(Math.max(total, segment.start), segment.value);
+          return (
             <div
-              className="vvp-ui-progress__track"
-              role="progressbar"
-              aria-valuemin={segment.start}
-              aria-valuemax={segment.value}
-              aria-valuenow={Math.min(Math.max(total, segment.start), segment.value)}
-              aria-label={
-                isSingleStep
-                  ? `${formatEuro(total)} von ${formatEuro(goal)} gesammelt`
-                  : `${segment.label} (${formatEuro(segment.value)})`
-              }
+              key={`${segment.value}-${index}`}
+              className="vvp-ui-progress__step"
+              style={{ flexBasis: `${segment.width}%`, flexGrow: segment.width, flexShrink: 0 }}
             >
-              <div className="vvp-ui-progress__fill" style={{ width: `${segment.percent}%` }} />
-            </div>
-            {!isSingleStep ? (
-              <div className="vvp-ui-progress__step-label">
-                <strong>{segment.label}</strong>
-                <span>{formatEuro(segment.value)}</span>
+              <div
+                className="vvp-ui-progress__track"
+                role="progressbar"
+                aria-valuemin={segment.start}
+                aria-valuemax={segment.value}
+                aria-valuenow={valueNow}
+                aria-valuetext={`${formatEuro(valueNow)} von ${formatEuro(segment.value)}`}
+                aria-label={
+                  isSingleStep
+                    ? `${formatEuro(total)} von ${formatEuro(goal)} gesammelt`
+                    : `${segment.label} (${formatEuro(segment.value)})`
+                }
+              >
+                <div className="vvp-ui-progress__fill" style={{ width: `${segment.percent}%` }} />
               </div>
-            ) : null}
-          </div>
-        ))}
+              {!isSingleStep ? (
+                <div className="vvp-ui-progress__step-label">
+                  <strong>{segment.label}</strong>
+                  <span>{formatEuro(segment.value)}</span>
+                </div>
+              ) : null}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
