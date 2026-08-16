@@ -1,5 +1,14 @@
 # @volksverpetzer/ui-web
 
+## 0.4.0
+
+### Minor Changes
+
+- [#6](https://github.com/Volksverpetzer/vvp_design_system/pull/6) [`da366bc`](https://github.com/Volksverpetzer/vvp_design_system/commit/da366bc5ba001f76697e870cd78c3d4441b2ca95) Thanks [@rejas](https://github.com/rejas)! - `Button` now forwards its `ref` to the underlying `<button>` element (via
+  `React.forwardRef`), so consumers can attach DOM refs — e.g. for scroll/
+  visibility tracking with `IntersectionObserver` — the same way they would
+  with a plain `<button>`.
+
 ## 0.3.0
 
 ### Minor Changes
