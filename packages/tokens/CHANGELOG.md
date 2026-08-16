@@ -1,5 +1,25 @@
 # @volksverpetzer/design-tokens
 
+## 0.4.0
+
+### Minor Changes
+
+- [#7](https://github.com/Volksverpetzer/vvp_design_system/pull/7) [`7d16c95`](https://github.com/Volksverpetzer/vvp_design_system/commit/7d16c95f33f83009a7ec76326a2873140eaab24d) Thanks [@rejas](https://github.com/rejas)! - Add an `elevation` token category (`xs`/`sm`/`md`/`lg`) for neutral
+  drop-shadows, so `vvp_app` doesn't have to hand-roll `boxShadow`/`elevation`
+  values per component. `xs` and `sm` are sourced directly from `vvp_app`'s
+  existing card-lift and floating-button shadows, not invented — `md`/`lg`
+  extend the same progression for overlays/modals.
+
+  - CSS: `@volksverpetzer/design-tokens/css/elevation.css` — ready-to-use
+    `--vvp-elevation-*` `box-shadow` values.
+  - React Native: `elevation` from `@volksverpetzer/design-tokens/rn/shared` —
+    each step has `offsetY`/`blur`/`opacity`/`android` plus a pre-assembled
+    `boxShadow` string for the RN "New Architecture" `boxShadow` View style
+    prop.
+
+  Color is always neutral black — brand-colored shadows (e.g. a pink CTA
+  glow) stay local/hand-written, not part of this scale.
+
 ## 0.3.0
 
 ### Minor Changes
