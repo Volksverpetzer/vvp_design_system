@@ -18,17 +18,24 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
  * responsible for loading a brand's token CSS (or SCSS, for Divi) before
  * this renders.
  */
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
-  { variant = "primary", size = "md", className, children, ...rest },
-  ref
-) {
-  const classes = ["vvp-ui-btn", `vvp-ui-btn--${variant}`, `vvp-ui-btn--${size}`, className]
-    .filter(Boolean)
-    .join(" ");
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  function Button(
+    { variant = "primary", size = "md", className, children, ...rest },
+    ref,
+  ) {
+    const classes = [
+      "vvp-ui-btn",
+      `vvp-ui-btn--${variant}`,
+      `vvp-ui-btn--${size}`,
+      className,
+    ]
+      .filter(Boolean)
+      .join(" ");
 
-  return (
-    <button ref={ref} className={classes} {...rest}>
-      {children}
-    </button>
-  );
-});
+    return (
+      <button ref={ref} className={classes} {...rest}>
+        {children}
+      </button>
+    );
+  },
+);

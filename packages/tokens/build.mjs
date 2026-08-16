@@ -1,18 +1,43 @@
 import StyleDictionary from "style-dictionary";
 
-import { rnTsConst, rnFontSizes, rnIconSizes, rnElevation, rnColorScheme } from "./formats/rn-ts-const.mjs";
-import { cssColorVars, cssScaleVars, cssElevationVars } from "./formats/css-vars.mjs";
+import {
+  rnTsConst,
+  rnFontSizes,
+  rnIconSizes,
+  rnElevation,
+  rnColorScheme,
+} from "./formats/rn-ts-const.mjs";
+import {
+  cssColorVars,
+  cssScaleVars,
+  cssElevationVars,
+} from "./formats/css-vars.mjs";
 import { scssBrandVars } from "./formats/scss-vars.mjs";
 
 StyleDictionary.registerFormat({ name: "rn/ts-const", format: rnTsConst });
 StyleDictionary.registerFormat({ name: "rn/font-sizes", format: rnFontSizes });
 StyleDictionary.registerFormat({ name: "rn/icon-sizes", format: rnIconSizes });
 StyleDictionary.registerFormat({ name: "rn/elevation", format: rnElevation });
-StyleDictionary.registerFormat({ name: "rn/color-scheme", format: rnColorScheme });
-StyleDictionary.registerFormat({ name: "css/color-vars", format: cssColorVars });
-StyleDictionary.registerFormat({ name: "css/scale-vars", format: cssScaleVars });
-StyleDictionary.registerFormat({ name: "css/elevation-vars", format: cssElevationVars });
-StyleDictionary.registerFormat({ name: "scss/brand-vars", format: scssBrandVars });
+StyleDictionary.registerFormat({
+  name: "rn/color-scheme",
+  format: rnColorScheme,
+});
+StyleDictionary.registerFormat({
+  name: "css/color-vars",
+  format: cssColorVars,
+});
+StyleDictionary.registerFormat({
+  name: "css/scale-vars",
+  format: cssScaleVars,
+});
+StyleDictionary.registerFormat({
+  name: "css/elevation-vars",
+  format: cssElevationVars,
+});
+StyleDictionary.registerFormat({
+  name: "scss/brand-vars",
+  format: scssBrandVars,
+});
 
 const SPACING_HEADER = `Central spacing scale for the app.
 
@@ -45,7 +70,16 @@ stays consistent and auditable.
 
 Source of truth: vvp_design_system/packages/tokens/tokens/font-size.json`;
 
-async function buildScale({ source, exportName, typeName, headerText, rnFile, cssPrefix, cssUnit, scss = false }) {
+async function buildScale({
+  source,
+  exportName,
+  typeName,
+  headerText,
+  rnFile,
+  cssPrefix,
+  cssUnit,
+  scss = false,
+}) {
   const platforms = {
     rn: {
       transformGroup: "js",
@@ -104,7 +138,13 @@ async function buildColorBrand(brand) {
       rn: {
         transformGroup: "js",
         buildPath: `gen-rn/rn/${brand}/`,
-        files: [{ destination: "Colors.ts", format: "rn/color-scheme", options: { exportName: "colorScheme" } }],
+        files: [
+          {
+            destination: "Colors.ts",
+            format: "rn/color-scheme",
+            options: { exportName: "colorScheme" },
+          },
+        ],
       },
       css: {
         transformGroup: "css",
@@ -136,12 +176,24 @@ async function buildIconSizes() {
       rn: {
         transformGroup: "js",
         buildPath: "gen-rn/rn/shared/",
-        files: [{ destination: "IconSizes.ts", format: "rn/icon-sizes", options: { headerText: ICON_SIZE_HEADER } }],
+        files: [
+          {
+            destination: "IconSizes.ts",
+            format: "rn/icon-sizes",
+            options: { headerText: ICON_SIZE_HEADER },
+          },
+        ],
       },
       css: {
         transformGroup: "css",
         buildPath: "dist/css/",
-        files: [{ destination: "icon-size.css", format: "css/scale-vars", options: { prefix: "icon-size", unit: "px" } }],
+        files: [
+          {
+            destination: "icon-size.css",
+            format: "css/scale-vars",
+            options: { prefix: "icon-size", unit: "px" },
+          },
+        ],
       },
     },
   });
@@ -165,7 +217,13 @@ async function buildElevation() {
       rn: {
         transformGroup: "js",
         buildPath: "gen-rn/rn/shared/",
-        files: [{ destination: "Elevation.ts", format: "rn/elevation", options: { headerText: ELEVATION_HEADER } }],
+        files: [
+          {
+            destination: "Elevation.ts",
+            format: "rn/elevation",
+            options: { headerText: ELEVATION_HEADER },
+          },
+        ],
       },
       css: {
         transformGroup: "css",
@@ -185,12 +243,24 @@ async function buildFontSizes() {
       rn: {
         transformGroup: "js",
         buildPath: "gen-rn/rn/shared/",
-        files: [{ destination: "FontSizes.ts", format: "rn/font-sizes", options: { headerText: FONT_SIZE_HEADER } }],
+        files: [
+          {
+            destination: "FontSizes.ts",
+            format: "rn/font-sizes",
+            options: { headerText: FONT_SIZE_HEADER },
+          },
+        ],
       },
       css: {
         transformGroup: "css",
         buildPath: "dist/css/",
-        files: [{ destination: "font-size.css", format: "css/scale-vars", options: { prefix: "font-size", unit: "px" } }],
+        files: [
+          {
+            destination: "font-size.css",
+            format: "css/scale-vars",
+            options: { prefix: "font-size", unit: "px" },
+          },
+        ],
       },
     },
   });

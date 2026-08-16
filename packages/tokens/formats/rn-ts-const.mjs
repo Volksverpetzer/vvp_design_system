@@ -8,11 +8,18 @@ export function rnTsConst({ dictionary, options }) {
 
   const lines = dictionary.allTokens.map((token) => {
     const key = token.path[token.path.length - 1];
-    const desc = token.original.$description ? `  /** ${token.original.$description} */\n` : "";
+    const desc = token.original.$description
+      ? `  /** ${token.original.$description} */\n`
+      : "";
     return `${desc}  ${key}: ${JSON.stringify(token.original.$value)},`;
   });
 
-  const header = headerText ? `/**\n${headerText.split("\n").map((l) => ` * ${l}`).join("\n")}\n */\n` : "";
+  const header = headerText
+    ? `/**\n${headerText
+        .split("\n")
+        .map((l) => ` * ${l}`)
+        .join("\n")}\n */\n`
+    : "";
 
   const body = `export const ${exportName} = {\n${lines.join("\n")}\n} as const;\n`;
 
@@ -29,12 +36,18 @@ export function rnTsConst({ dictionary, options }) {
  */
 export function rnFontSizes({ dictionary, options }) {
   const { headerText } = options;
-  const sizeTokens = dictionary.allTokens.filter((t) => t.path[0] === "fontSize");
-  const contentLineHeight = dictionary.allTokens.find((t) => t.path[0] === "contentLineHeight");
+  const sizeTokens = dictionary.allTokens.filter(
+    (t) => t.path[0] === "fontSize",
+  );
+  const contentLineHeight = dictionary.allTokens.find(
+    (t) => t.path[0] === "contentLineHeight",
+  );
 
   const sizeLines = sizeTokens.map((t) => {
     const key = t.path[t.path.length - 1];
-    const desc = t.original.$description ? `  /** ${t.original.$description} */\n` : "";
+    const desc = t.original.$description
+      ? `  /** ${t.original.$description} */\n`
+      : "";
     return `${desc}  ${key}: ${JSON.stringify(t.original.$value)},`;
   });
 
@@ -44,7 +57,12 @@ export function rnFontSizes({ dictionary, options }) {
     return `  ${key}: ${JSON.stringify(lh)}, // ${t.original.$value} × ~1.33–1.4`;
   });
 
-  const header = headerText ? `/**\n${headerText.split("\n").map((l) => ` * ${l}`).join("\n")}\n */\n` : "";
+  const header = headerText
+    ? `/**\n${headerText
+        .split("\n")
+        .map((l) => ` * ${l}`)
+        .join("\n")}\n */\n`
+    : "";
 
   return `${header}export const fontSizes = {
 ${sizeLines.join("\n")}
@@ -74,16 +92,27 @@ ${lineHeightLines.join("\n")}
  */
 export function rnIconSizes({ dictionary, options }) {
   const { headerText } = options;
-  const sizeTokens = dictionary.allTokens.filter((t) => t.path[0] === "iconSize");
-  const minTouchTarget = dictionary.allTokens.find((t) => t.path[0] === "minTouchTarget");
+  const sizeTokens = dictionary.allTokens.filter(
+    (t) => t.path[0] === "iconSize",
+  );
+  const minTouchTarget = dictionary.allTokens.find(
+    (t) => t.path[0] === "minTouchTarget",
+  );
 
   const sizeLines = sizeTokens.map((t) => {
     const key = t.path[t.path.length - 1];
-    const desc = t.original.$description ? `  /** ${t.original.$description} */\n` : "";
+    const desc = t.original.$description
+      ? `  /** ${t.original.$description} */\n`
+      : "";
     return `${desc}  ${key}: ${JSON.stringify(t.original.$value)},`;
   });
 
-  const header = headerText ? `/**\n${headerText.split("\n").map((l) => ` * ${l}`).join("\n")}\n */\n` : "";
+  const header = headerText
+    ? `/**\n${headerText
+        .split("\n")
+        .map((l) => ` * ${l}`)
+        .join("\n")}\n */\n`
+    : "";
 
   return `${header}export const iconSizes = {
 ${sizeLines.join("\n")}
@@ -114,7 +143,9 @@ export function rnElevation({ dictionary, options }) {
   const lines = steps.map((t) => {
     const key = t.path[t.path.length - 1];
     const { offsetY, blur, opacity, android } = t.original.$value;
-    const desc = t.original.$description ? `  /** ${t.original.$description} */\n` : "";
+    const desc = t.original.$description
+      ? `  /** ${t.original.$description} */\n`
+      : "";
     return `${desc}  ${key}: {
     offsetY: ${offsetY},
     blur: ${blur},
@@ -124,7 +155,12 @@ export function rnElevation({ dictionary, options }) {
   },`;
   });
 
-  const header = headerText ? `/**\n${headerText.split("\n").map((l) => ` * ${l}`).join("\n")}\n */\n` : "";
+  const header = headerText
+    ? `/**\n${headerText
+        .split("\n")
+        .map((l) => ` * ${l}`)
+        .join("\n")}\n */\n`
+    : "";
 
   return `${header}export const elevation = {
 ${lines.join("\n")}
