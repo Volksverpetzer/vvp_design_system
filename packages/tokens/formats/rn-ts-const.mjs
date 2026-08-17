@@ -86,6 +86,40 @@ ${lineHeightLines.join("\n")}
 }
 
 /**
+ * Emits fontFamily + FontFamilyToken. Reads only the `fontFamily.*` weight
+ * variants (React Native PostScript names) — the sibling `webFontFamily` CSS
+ * stack token is web-only and has no RN output.
+ */
+export function rnFontFamily({ dictionary, options }) {
+  const { headerText } = options;
+  const familyTokens = dictionary.allTokens.filter(
+    (t) => t.path[0] === "fontFamily",
+  );
+
+  const lines = familyTokens.map((t) => {
+    const key = t.path[t.path.length - 1];
+    const desc = t.original.$description
+      ? `  /** ${t.original.$description} */\n`
+      : "";
+    return `${desc}  ${key}: ${JSON.stringify(t.original.$value)},`;
+  });
+
+  const header = headerText
+    ? `/**\n${headerText
+        .split("\n")
+        .map((l) => ` * ${l}`)
+        .join("\n")}\n */\n`
+    : "";
+
+  return `${header}export const fontFamily = {
+${lines.join("\n")}
+} as const;
+
+export type FontFamilyToken = keyof typeof fontFamily;
+`;
+}
+
+/**
  * Emits iconSizes + IconSizeToken + a standalone MIN_TOUCH_TARGET export
  * (kept out of the iconSizes scale object — it's a hit-area constant, not a
  * valid icon `size` step).

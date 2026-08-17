@@ -4,6 +4,7 @@ writeFileSync(
   "gen-rn/rn/shared/index.ts",
   `export * from "./Spacing";
 export * from "./FontSizes";
+export * from "./FontFamily";
 export * from "./BorderRadius";
 export * from "./IconSizes";
 export * from "./Elevation";

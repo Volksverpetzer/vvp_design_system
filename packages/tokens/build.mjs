@@ -3,6 +3,7 @@ import StyleDictionary from "style-dictionary";
 import {
   rnTsConst,
   rnFontSizes,
+  rnFontFamily,
   rnIconSizes,
   rnElevation,
   rnColorScheme,
@@ -10,12 +11,17 @@ import {
 import {
   cssColorVars,
   cssScaleVars,
+  cssFontFamily,
   cssElevationVars,
 } from "./formats/css-vars.mjs";
 import { scssBrandVars } from "./formats/scss-vars.mjs";
 
 StyleDictionary.registerFormat({ name: "rn/ts-const", format: rnTsConst });
 StyleDictionary.registerFormat({ name: "rn/font-sizes", format: rnFontSizes });
+StyleDictionary.registerFormat({
+  name: "rn/font-family",
+  format: rnFontFamily,
+});
 StyleDictionary.registerFormat({ name: "rn/icon-sizes", format: rnIconSizes });
 StyleDictionary.registerFormat({ name: "rn/elevation", format: rnElevation });
 StyleDictionary.registerFormat({
@@ -29,6 +35,10 @@ StyleDictionary.registerFormat({
 StyleDictionary.registerFormat({
   name: "css/scale-vars",
   format: cssScaleVars,
+});
+StyleDictionary.registerFormat({
+  name: "css/font-family",
+  format: cssFontFamily,
 });
 StyleDictionary.registerFormat({
   name: "css/elevation-vars",
@@ -69,6 +79,14 @@ Every text size should come from this scale so the typographic hierarchy
 stays consistent and auditable.
 
 Source of truth: vvp_design_system/packages/tokens/tokens/font-size.json`;
+
+const FONT_FAMILY_HEADER = `Central font-family scale for the app.
+
+Every custom-font text style should reference one of these weight variants
+instead of hardcoding the PostScript name, so a font swap only touches this
+file.
+
+Source of truth: vvp_design_system/packages/tokens/tokens/font-family.json`;
 
 async function buildScale({
   source,
@@ -267,6 +285,32 @@ async function buildFontSizes() {
   await sd.buildAllPlatforms();
 }
 
+async function buildFontFamily() {
+  const sd = new StyleDictionary({
+    usesDtcg: true,
+    source: ["tokens/font-family.json"],
+    platforms: {
+      rn: {
+        transformGroup: "js",
+        buildPath: "gen-rn/rn/shared/",
+        files: [
+          {
+            destination: "FontFamily.ts",
+            format: "rn/font-family",
+            options: { headerText: FONT_FAMILY_HEADER },
+          },
+        ],
+      },
+      css: {
+        transformGroup: "css",
+        buildPath: "dist/css/",
+        files: [{ destination: "font-family.css", format: "css/font-family" }],
+      },
+    },
+  });
+  await sd.buildAllPlatforms();
+}
+
 await buildScale({
   source: "tokens/spacing.json",
   exportName: "spacing",
@@ -290,6 +334,7 @@ await buildScale({
 
 await buildIconSizes();
 await buildFontSizes();
+await buildFontFamily();
 await buildElevation();
 await buildColorBrand("volksverpetzer");
 await buildColorBrand("mimikama");
