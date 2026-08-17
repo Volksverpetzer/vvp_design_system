@@ -1,0 +1,29 @@
+{
+  "fontFamily": {
+    "regular": {
+      "$value": "SourceSansPro",
+      "$type": "fontFamily",
+      "$description": "Default body/UI weight. React Native PostScript name — loaded via expo-font as SourceSans3_400Regular in vvp_app's root layout."
+    },
+    "italic": {
+      "$value": "SourceSansProItalic",
+      "$type": "fontFamily",
+      "$description": "Italic body/UI weight. React Native PostScript name — loaded via expo-font as SourceSans3_400Regular_Italic."
+    },
+    "bold": {
+      "$value": "SourceSansProBold",
+      "$type": "fontFamily",
+      "$description": "Bold weight for emphasis, labels and headings. React Native PostScript name — loaded via expo-font as SourceSans3_700Bold."
+    },
+    "boldItalic": {
+      "$value": "SourceSansProBoldItalic",
+      "$type": "fontFamily",
+      "$description": "Bold italic weight. React Native PostScript name — loaded via expo-font as SourceSans3_700Bold_Italic."
+    }
+  },
+  "webFontFamily": {
+    "$value": "'Source Sans Pro', system-ui, sans-serif",
+    "$type": "fontFamily",
+    "$description": "CSS font-family stack for web consumers. The @font-face rules themselves are registered in vvp_wp_theme/volksverpetzer/style.css — this token is just the stack value, for wherever that stylesheet's family name needs to be referenced (e.g. ui-web used standalone, outside the Divi theme)."
+  }
+}

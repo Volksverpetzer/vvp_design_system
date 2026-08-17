@@ -30,6 +30,16 @@ export function cssScaleVars({ dictionary, options }) {
 }
 
 /**
+ * Emits the single `--vvp-font-family` CSS var from the `webFontFamily`
+ * token — the sibling `fontFamily.*` React Native PostScript names have no
+ * CSS output (they aren't registered @font-face family names on the web).
+ */
+export function cssFontFamily({ dictionary }) {
+  const token = dictionary.allTokens.find((t) => t.path[0] === "webFontFamily");
+  return `:root {\n  --vvp-font-family: ${token.original.$value};\n}\n`;
+}
+
+/**
  * Emits ready-to-use `:root { --vvp-elevation-x: 0px Ypx Bpx rgba(...); }`
  * box-shadow values (one property per step, not decomposed) — used directly
  * as `box-shadow: var(--vvp-elevation-x)`. Color is always neutral black;
