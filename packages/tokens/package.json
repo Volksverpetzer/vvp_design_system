@@ -2,6 +2,7 @@
   "name": "@volksverpetzer/design-tokens",
   "version": "0.4.0",
   "description": "Shared design tokens (color, spacing, typography, radii, icon sizes, elevation) for Volksverpetzer apps, transformed per-platform via Style Dictionary.",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/Volksverpetzer/vvp_design_system.git",
