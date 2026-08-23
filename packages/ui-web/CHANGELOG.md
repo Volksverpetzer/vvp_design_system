@@ -1,5 +1,11 @@
 # @volksverpetzer/ui-web
 
+## 0.4.1
+
+### Patch Changes
+
+- [`0b436b5`](https://github.com/Volksverpetzer/vvp_design_system/commit/0b436b5d56070193a1047dfe5379c28e25b3b6a2) - Add the missing `license` field (MIT) — npm was showing "UNKNOWN" for both packages since neither `package.json` declared one. Also adds a `LICENSE` file at the repo root.
+
 ## 0.4.0
 
 ### Minor Changes

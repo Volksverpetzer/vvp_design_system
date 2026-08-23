@@ -1,6 +1,6 @@
 {
   "name": "@volksverpetzer/design-tokens",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Shared design tokens (color, spacing, typography, radii, icon sizes, elevation) for Volksverpetzer apps, transformed per-platform via Style Dictionary.",
   "license": "MIT",
   "repository": {
