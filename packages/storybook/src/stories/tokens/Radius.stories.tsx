@@ -46,7 +46,7 @@ export const AllValues: Story = {
                 style={{
                   height: 48,
                   width: 48,
-                  background: "#1B7194",
+                  background: "var(--vvp-primary, #1B7194)",
                   borderRadius: Math.min(token.$value, 48),
                 }}
               />

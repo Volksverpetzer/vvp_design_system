@@ -25,7 +25,7 @@ export const AllValues: Story = {
         gap: 48,
         flexWrap: "wrap",
         padding: 24,
-        background: "#f0f0f0",
+        background: "var(--vvp-surface, #f0f0f0)",
       }}
     >
       {Object.entries(tokens).map(([name, token]) => (
@@ -35,7 +35,7 @@ export const AllValues: Story = {
               width: 96,
               height: 96,
               borderRadius: 12,
-              background: "#fff",
+              background: "var(--vvp-background, #fff)",
               boxShadow: `0 ${token.$value.offsetY}px ${token.$value.blur}px rgba(0,0,0,${token.$value.opacity})`,
             }}
           />

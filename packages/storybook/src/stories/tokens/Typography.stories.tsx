@@ -51,7 +51,7 @@ export const FontSizes: Story = {
                 lineHeight: `${token.$extensions?.lineHeight}px`,
               }}
             >
-              Volksverpetzer
+              Sample text
             </td>
             <td style={{ padding: "10px 12px", fontSize: 13, opacity: 0.8 }}>
               {token.$description}

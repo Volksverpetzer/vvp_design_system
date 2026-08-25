@@ -49,7 +49,7 @@ export const AllValues: Story = {
                     width: token.$value,
                     height: token.$value,
                     borderRadius: "50%",
-                    background: "#1B7194",
+                    background: "var(--vvp-primary, #1B7194)",
                   }}
                 />
               </td>
