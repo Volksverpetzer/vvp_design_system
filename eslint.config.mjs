@@ -44,10 +44,13 @@ export default [
     },
   },
   {
-    // React/JSX rules only apply to ui-web — packages/tokens is plain
-    // Node/TypeScript (Style Dictionary build scripts + generated output),
-    // no JSX involved.
-    files: ["packages/ui-web/**/*.{ts,tsx}"],
+    // React/JSX rules apply to ui-web and storybook — packages/tokens is
+    // plain Node/TypeScript (Style Dictionary build scripts + generated
+    // output), no JSX involved.
+    files: [
+      "packages/ui-web/**/*.{ts,tsx}",
+      "packages/storybook/**/*.{ts,tsx}",
+    ],
     plugins: {
       ...reactPlugin.configs.flat.recommended.plugins,
       ...reactHooks.configs.flat["recommended-latest"].plugins,

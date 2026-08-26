@@ -1,0 +1,29 @@
+{
+  "name": "@volksverpetzer/storybook",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "prestorybook": "pnpm --filter @volksverpetzer/design-tokens --filter @volksverpetzer/ui-web build",
+    "storybook": "storybook dev -p 6006",
+    "prebuild-storybook": "pnpm --filter @volksverpetzer/design-tokens --filter @volksverpetzer/ui-web build",
+    "build-storybook": "storybook build -o dist",
+    "check:ts": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@volksverpetzer/design-tokens": "workspace:*",
+    "@volksverpetzer/ui-web": "workspace:*",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
+  },
+  "devDependencies": {
+    "@storybook/addon-docs": "^10.5.10",
+    "@storybook/react-vite": "^10.5.10",
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.5",
+    "storybook": "^10.5.10",
+    "typescript": "^5.9.3",
+    "vite": "^8.2.2"
+  }
+}
