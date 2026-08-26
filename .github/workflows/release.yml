@@ -43,3 +43,24 @@ jobs:
           publish: pnpm changeset publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🏷️ Ensure published packages are tagged
+        if: steps.changesets.outputs.published == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          echo '${{ steps.changesets.outputs.publishedPackages }}' | jq -c '.[]' | while read -r pkg; do
+            name=$(echo "$pkg" | jq -r '.name')
+            version=$(echo "$pkg" | jq -r '.version')
+            tag="$name@$version"
+            if git ls-remote --exit-code --tags origin "refs/tags/$tag" > /dev/null 2>&1; then
+              echo "Tag $tag already exists on origin, skipping"
+            elif git rev-parse -q --verify "refs/tags/$tag" > /dev/null 2>&1; then
+              echo "changeset publish already created $tag locally but didn't push it — pushing now"
+              git push origin "$tag"
+            else
+              echo "Tag $tag missing entirely — creating and pushing it now"
+              git tag -a "$tag" -m "$tag"
+              git push origin "$tag"
+            fi
+          done
