@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "storybook": "pnpm --filter @volksverpetzer/storybook storybook",
-    "build-storybook": "pnpm --filter @volksverpetzer/storybook build",
+    "build-storybook": "pnpm --filter @volksverpetzer/storybook build-storybook",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "pnpm build && changeset publish"

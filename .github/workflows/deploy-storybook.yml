@@ -34,9 +34,6 @@ jobs:
       - name: 📦 Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: 🏗️ Build packages
-        run: pnpm --filter @volksverpetzer/design-tokens --filter @volksverpetzer/ui-web build
-
       - name: 📖 Build Storybook
         run: pnpm build-storybook
         env:

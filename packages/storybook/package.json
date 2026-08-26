@@ -6,8 +6,8 @@
   "scripts": {
     "prestorybook": "pnpm --filter @volksverpetzer/design-tokens --filter @volksverpetzer/ui-web build",
     "storybook": "storybook dev -p 6006",
-    "prebuild": "pnpm --filter @volksverpetzer/design-tokens --filter @volksverpetzer/ui-web build",
-    "build": "storybook build -o dist",
+    "prebuild-storybook": "pnpm --filter @volksverpetzer/design-tokens --filter @volksverpetzer/ui-web build",
+    "build-storybook": "storybook build -o dist",
     "check:ts": "tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
