@@ -36,6 +36,11 @@ export function cssScaleVars({ dictionary, options }) {
  */
 export function cssFontFamily({ dictionary }) {
   const token = dictionary.allTokens.find((t) => t.path[0] === "webFontFamily");
+  if (!token) {
+    throw new Error(
+      "cssFontFamily: no `webFontFamily` token found — check tokens/font-family.json",
+    );
+  }
   return `:root {\n  --vvp-font-family: ${token.original.$value};\n}\n`;
 }
 
