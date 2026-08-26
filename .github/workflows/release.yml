@@ -55,8 +55,11 @@ jobs:
             tag="$name@$version"
             if git ls-remote --exit-code --tags origin "refs/tags/$tag" > /dev/null 2>&1; then
               echo "Tag $tag already exists on origin, skipping"
+            elif git rev-parse -q --verify "refs/tags/$tag" > /dev/null 2>&1; then
+              echo "changeset publish already created $tag locally but didn't push it — pushing now"
+              git push origin "$tag"
             else
-              echo "changesets/action didn't push tag $tag — creating and pushing it now"
+              echo "Tag $tag missing entirely — creating and pushing it now"
               git tag -a "$tag" -m "$tag"
               git push origin "$tag"
             fi
