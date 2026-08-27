@@ -11,3 +11,5 @@ export {
   type ProgressBarProps,
   type ProgressBarMilestone,
 } from "./ProgressBar";
+export { Input, type InputProps } from "./Input";
+export { Alert, type AlertProps, type AlertVariant } from "./Alert";
