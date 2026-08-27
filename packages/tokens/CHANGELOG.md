@@ -1,5 +1,11 @@
 # @volksverpetzer/design-tokens
 
+## 0.6.0
+
+### Minor Changes
+
+- [`2f4a7cd`](https://github.com/Volksverpetzer/vvp_design_system/commit/2f4a7cd12a9722aa746fcbfc3dc0690d714442e7) - Add a `pruefpunkt` color token (both brands, light + dark) — Volksverpetzer's own fact-check verification sub-brand, distinct from the primary/accent CTA colors. Motivated by vvp_divi5_extensions's badge components (Prüfpunkt, YouTube, Instagram, Podcast category tags), which previously hardcoded their own one-off hex values with no shared source of truth.
+
 ## 0.5.0
 
 ### Minor Changes
