@@ -88,9 +88,13 @@ jobs:
             # .version at each one — not a text/pickaxe match, so it doesn't depend on
             # package.json's formatting. Keep descending while the version still matches
             # $version; the last (oldest) match in that run is the commit that introduced it.
+            # `|| candidate_version=""` guards against the pipeline failing (e.g. the
+            # file didn't exist yet, or was unparseable, at that revision) hard-aborting
+            # the step under this shell's default -e/pipefail — an empty value just
+            # fails the comparison below and stops the walk like any other mismatch.
             commit=""
             for candidate in $(git log --format=%H -- "$pkg_json"); do
-              candidate_version=$(git show "$candidate:$pkg_json" 2>/dev/null | jq -r '.version // empty')
+              candidate_version=$(git show "$candidate:$pkg_json" 2>/dev/null | jq -r '.version // empty' 2>/dev/null) || candidate_version=""
               if [ "$candidate_version" = "$version" ]; then
                 commit="$candidate"
               else
