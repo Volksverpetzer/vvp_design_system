@@ -1,0 +1,14 @@
+.vvp-ui-alert {
+  border-radius: var(--vvp-radius-sm, 8px);
+  border: 1px solid var(--vvp-surface-input, #badde8);
+  background: var(--vvp-background, #fff);
+  color: var(--vvp-text, #111);
+  padding: var(--vvp-spacing-md, 10px) var(--vvp-spacing-lg, 16px);
+  font-size: var(--vvp-font-size-sm, 14px);
+  line-height: 1.5;
+}
+
+.vvp-ui-alert--error {
+  border-color: var(--vvp-error, #c62828);
+  color: var(--vvp-error, #c62828);
+}

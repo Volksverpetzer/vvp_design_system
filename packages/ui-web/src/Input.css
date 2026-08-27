@@ -1,0 +1,48 @@
+.vvp-ui-input {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  border-radius: var(--vvp-radius-sm, 8px);
+  border: 1px solid var(--vvp-surface-input, #badde8);
+  background: var(--vvp-background, #fff);
+  color: var(--vvp-text, #111);
+  padding: var(--vvp-spacing-sm, 8px) var(--vvp-spacing-md, 10px);
+  font-family: inherit;
+  font-size: var(--vvp-font-size-base, 16px);
+  line-height: 1.4;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.vvp-ui-input::placeholder {
+  color: var(--vvp-text-muted, #666);
+}
+
+.vvp-ui-input:focus-visible {
+  outline: none;
+  border-color: var(--vvp-primary, #1b7194);
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--vvp-primary, #1b7194) 25%, transparent);
+}
+
+.vvp-ui-input:disabled {
+  background: var(--vvp-surface-disabled, #ddd);
+  color: var(--vvp-text-muted, #666);
+  cursor: not-allowed;
+}
+
+/*
+ * Consumers flag a failed-validation field via the native aria-invalid
+ * attribute rather than a bespoke prop — most form libraries already set
+ * it automatically, and it's the accessible way to mark the field anyway.
+ */
+.vvp-ui-input[aria-invalid="true"] {
+  border-color: var(--vvp-error, #c62828);
+}
+
+.vvp-ui-input[aria-invalid="true"]:focus-visible {
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--vvp-error, #c62828) 25%, transparent);
+}
