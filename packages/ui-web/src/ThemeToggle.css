@@ -1,0 +1,6 @@
+.vvp-ui-theme-toggle {
+  position: fixed;
+  top: var(--vvp-spacing-lg, 16px);
+  right: var(--vvp-spacing-lg, 16px);
+  z-index: 50;
+}

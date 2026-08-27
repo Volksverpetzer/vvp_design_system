@@ -14,3 +14,4 @@ export {
 export { Input, type InputProps } from "./Input";
 export { Alert, type AlertProps, type AlertVariant } from "./Alert";
 export { Slider, type SliderProps } from "./Slider";
+export { ThemeToggle } from "./ThemeToggle";
