@@ -51,12 +51,16 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+          failed=0
+
           for pkg_json in packages/*/package.json; do
             if [ "$(jq -r '.private // false' "$pkg_json")" = "true" ]; then
               continue
             fi
-            name=$(jq -r '.name' "$pkg_json")
-            version=$(jq -r '.version' "$pkg_json")
+            # Guarded the same way as the npm_output/candidate_version reads below: a
+            # bad package.json here would otherwise hard-abort the whole step under -e.
+            name=$(jq -r '.name' "$pkg_json") || { echo "Failed to read .name from $pkg_json"; exit 1; }
+            version=$(jq -r '.version' "$pkg_json") || { echo "Failed to read .version from $pkg_json"; exit 1; }
             tag="$name@$version"
 
             if git ls-remote --exit-code --tags origin "refs/tags/$tag" > /dev/null 2>&1; then
@@ -80,7 +84,13 @@ jobs:
 
             if git rev-parse -q --verify "refs/tags/$tag" > /dev/null 2>&1; then
               echo "$tag exists locally but not on origin — pushing"
-              git push origin "$tag"
+              # A push failure here shouldn't take the rest of the packages in this
+              # loop down with it — record it and keep going, then fail the step
+              # afterwards so the run is still reported as failed.
+              if ! git push origin "$tag"; then
+                echo "Failed to push $tag, continuing with other packages"
+                failed=1
+              fi
               continue
             fi
 
@@ -110,6 +120,12 @@ jobs:
             fi
 
             echo "$tag is published on npm but untagged — creating it at $commit and pushing"
-            git tag -a "$tag" -m "$tag" "$commit"
-            git push origin "$tag"
+            if ! git tag -a "$tag" -m "$tag" "$commit" || ! git push origin "$tag"; then
+              echo "Failed to tag/push $tag, continuing with other packages"
+              failed=1
+            fi
           done
+
+          if [ "$failed" -eq 1 ]; then
+            exit 1
+          fi
