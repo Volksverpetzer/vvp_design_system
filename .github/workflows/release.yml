@@ -46,25 +46,30 @@ jobs:
 
       - name: 🏷️ Ensure published packages are tagged
         run: |
-          packages='${{ steps.changesets.outputs.publishedPackages }}'
-          if [ -z "$packages" ] || [ "$packages" = "[]" ]; then
-            echo "No published packages reported, nothing to tag"
-            exit 0
-          fi
-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          echo "$packages" | jq -c '.[]' | while read -r pkg; do
-            name=$(echo "$pkg" | jq -r '.name')
-            version=$(echo "$pkg" | jq -r '.version')
+
+          for pkg_json in packages/*/package.json; do
+            if [ "$(jq -r '.private // false' "$pkg_json")" = "true" ]; then
+              continue
+            fi
+            name=$(jq -r '.name' "$pkg_json")
+            version=$(jq -r '.version' "$pkg_json")
             tag="$name@$version"
+
             if git ls-remote --exit-code --tags origin "refs/tags/$tag" > /dev/null 2>&1; then
-              echo "Tag $tag already exists on origin, skipping"
-            elif git rev-parse -q --verify "refs/tags/$tag" > /dev/null 2>&1; then
-              echo "changeset publish already created $tag locally but didn't push it — pushing now"
+              continue
+            fi
+            if ! npm view "$name@$version" version > /dev/null 2>&1; then
+              echo "$tag not on npm yet, skipping"
+              continue
+            fi
+
+            if git rev-parse -q --verify "refs/tags/$tag" > /dev/null 2>&1; then
+              echo "$tag exists locally but not on origin — pushing"
               git push origin "$tag"
             else
-              echo "Tag $tag missing entirely — creating and pushing it now"
+              echo "$tag is published on npm but untagged — creating and pushing it now"
               git tag -a "$tag" -m "$tag"
               git push origin "$tag"
             fi
