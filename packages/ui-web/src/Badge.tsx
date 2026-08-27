@@ -9,7 +9,7 @@ export type BadgeSize = "sm" | "md";
 
 export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   variant?: BadgeVariant;
-  /** @default "sm" */
+  /** @default "md" */
   size?: BadgeSize;
   /** Rendered before the label — an SVG icon, sized to match the text. */
   icon?: ReactNode;
@@ -24,7 +24,7 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
  */
 export function Badge({
   variant = "neutral",
-  size = "sm",
+  size = "md",
   icon,
   className,
   children,

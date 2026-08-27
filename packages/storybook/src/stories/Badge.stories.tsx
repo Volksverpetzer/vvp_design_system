@@ -8,7 +8,7 @@ const meta: Meta<typeof Badge> = {
   args: {
     children: "Badge",
     variant: "neutral",
-    size: "sm",
+    size: "md",
   },
   argTypes: {
     variant: {
