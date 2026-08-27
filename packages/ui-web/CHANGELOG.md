@@ -1,5 +1,20 @@
 # @volksverpetzer/ui-web
 
+## 0.8.0
+
+### Minor Changes
+
+- [#29](https://github.com/Volksverpetzer/vvp_design_system/pull/29) [`aa5394c`](https://github.com/Volksverpetzer/vvp_design_system/commit/aa5394c53c422933f40e52df0644b448daa8a3bb) Thanks [@rejas](https://github.com/rejas)! - Add `ThemeToggle`, moved out of vvp_link_shortener and vectorcrawl where it was hand-rolled identically in both. A fixed-corner light/dark switch: persists the choice to `localStorage`, falls back to `prefers-color-scheme`, and flips the `dark` class on `<html>` — the same convention the `--vvp-*` tokens' `.dark` scope already expects. Browser-only by nature, so there's no Divi/React Native variant.
+
+### Patch Changes
+
+- [#27](https://github.com/Volksverpetzer/vvp_design_system/pull/27) [`41067c2`](https://github.com/Volksverpetzer/vvp_design_system/commit/41067c29578253e7553f0d3e85f49654e7ef7f98) Thanks [@rejas](https://github.com/rejas)! - `Input`'s radius/border-color/padding now use whichever existing token
+  lands closest to `vvp_crowdfunding`'s donation-form input — its actual
+  first real consumer — instead of the arbitrary `--vvp-radius-sm`/
+  `--vvp-surface-input`/`--vvp-spacing-sm`+`--vvp-spacing-md` picked before
+  any real consumer existed. Also switched the focus style from a
+  box-shadow ring to a 2px outline, matching that same consumer.
+
 ## 0.7.0
 
 ### Minor Changes
