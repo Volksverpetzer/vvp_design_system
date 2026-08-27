@@ -8,11 +8,16 @@ const meta: Meta<typeof Badge> = {
   args: {
     children: "Badge",
     variant: "neutral",
+    size: "md",
   },
   argTypes: {
     variant: {
       control: "select",
       options: ["primary", "accent", "neutral", "error", "pruefpunkt"],
+    },
+    size: {
+      control: "select",
+      options: ["sm", "md"],
     },
   },
 };
@@ -51,6 +56,19 @@ const YouTubeIcon = () => (
 export const WithIcon: Story = {
   name: "With icon (e.g. a YouTube category tag)",
   args: { variant: "error", icon: <YouTubeIcon />, children: "YouTube" },
+};
+
+export const Sizes: Story = {
+  render: (args) => (
+    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+      <Badge {...args} size="sm">
+        sm
+      </Badge>
+      <Badge {...args} size="md">
+        md
+      </Badge>
+    </div>
+  ),
 };
 
 export const AllVariants: Story = {

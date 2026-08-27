@@ -5,8 +5,12 @@ import "./Badge.css";
 export type BadgeVariant =
   "primary" | "accent" | "neutral" | "error" | "pruefpunkt";
 
+export type BadgeSize = "sm" | "md";
+
 export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   variant?: BadgeVariant;
+  /** @default "md" */
+  size?: BadgeSize;
   /** Rendered before the label — an SVG icon, sized to match the text. */
   icon?: ReactNode;
   children: ReactNode;
@@ -20,12 +24,18 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
  */
 export function Badge({
   variant = "neutral",
+  size = "md",
   icon,
   className,
   children,
   ...rest
 }: BadgeProps) {
-  const classes = ["vvp-ui-badge", `vvp-ui-badge--${variant}`, className]
+  const classes = [
+    "vvp-ui-badge",
+    `vvp-ui-badge--${variant}`,
+    `vvp-ui-badge--size-${size}`,
+    className,
+  ]
     .filter(Boolean)
     .join(" ");
 
