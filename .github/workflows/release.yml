@@ -63,8 +63,11 @@ jobs:
               continue
             fi
 
-            npm_output=$(npm view "$name@$version" version 2>&1)
-            npm_status=$?
+            # `&& npm_status=0 || npm_status=$?` (rather than a plain `npm_status=$?` on
+            # the next line) keeps this list exempt from the shell's default -e, since a
+            # non-zero exit here — including the everyday E404 for an unpublished version
+            # — is expected and handled below, not a reason to abort the step.
+            npm_output=$(npm view "$name@$version" version 2>&1) && npm_status=0 || npm_status=$?
             if [ $npm_status -ne 0 ]; then
               if echo "$npm_output" | grep -q "E404"; then
                 echo "$tag not on npm yet, skipping"
