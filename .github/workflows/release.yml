@@ -45,11 +45,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 🏷️ Ensure published packages are tagged
-        if: steps.changesets.outputs.published == 'true'
         run: |
+          packages='${{ steps.changesets.outputs.publishedPackages }}'
+          if [ -z "$packages" ] || [ "$packages" = "[]" ]; then
+            echo "No published packages reported, nothing to tag"
+            exit 0
+          fi
+
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          echo '${{ steps.changesets.outputs.publishedPackages }}' | jq -c '.[]' | while read -r pkg; do
+          echo "$packages" | jq -c '.[]' | while read -r pkg; do
             name=$(echo "$pkg" | jq -r '.name')
             version=$(echo "$pkg" | jq -r '.version')
             tag="$name@$version"
