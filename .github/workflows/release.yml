@@ -84,13 +84,16 @@ jobs:
             # Tag the commit that actually introduced this version, not opportunistically
             # whatever commit this workflow run happens to be checked out at — a later,
             # unrelated push could otherwise steal the tag onto the wrong commit.
-            # -S matches commits that added OR removed the line, so once a later commit
-            # bumps past $version, the most recent hit is that later (removing) commit —
-            # filter to the hit that actually added the line.
+            # Walk commits touching this file (newest first) and compare the parsed
+            # .version at each one — not a text/pickaxe match, so it doesn't depend on
+            # package.json's formatting. Keep descending while the version still matches
+            # $version; the last (oldest) match in that run is the commit that introduced it.
             commit=""
-            for candidate in $(git log --format=%H -S"\"version\": \"$version\"" -- "$pkg_json"); do
-              if git show "$candidate" -- "$pkg_json" | grep -E '^\+[^+]' | grep -qF "\"version\": \"$version\""; then
+            for candidate in $(git log --format=%H -- "$pkg_json"); do
+              candidate_version=$(git show "$candidate:$pkg_json" 2>/dev/null | jq -r '.version // empty')
+              if [ "$candidate_version" = "$version" ]; then
                 commit="$candidate"
+              else
                 break
               fi
             done
