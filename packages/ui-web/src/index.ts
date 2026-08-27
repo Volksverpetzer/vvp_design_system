@@ -4,6 +4,7 @@ export {
   type ButtonVariant,
   type ButtonSize,
 } from "./Button";
+export { LinkButton, type LinkButtonProps } from "./LinkButton";
 export { Badge, type BadgeProps, type BadgeVariant } from "./Badge";
 export { Card, type CardProps } from "./Card";
 export {
