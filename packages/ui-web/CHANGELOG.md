@@ -1,5 +1,16 @@
 # @volksverpetzer/ui-web
 
+## 0.7.0
+
+### Minor Changes
+
+- [#23](https://github.com/Volksverpetzer/vvp_design_system/pull/23) [`b13d805`](https://github.com/Volksverpetzer/vvp_design_system/commit/b13d805bc9c0ab0d22103fdcd23319d16af95a9f) Thanks [@rejas](https://github.com/rejas)! - Add `Input` and `Alert`, moved out of vvp_link_shortener where both were originally hand-rolled with shadcn/Tailwind. Rebuilt on the same plain, hand-scoped `vvp-ui-*` CSS as the rest of this package (no Tailwind classes) so they also drop into `vvp_divi5_extensions`'s Divi-embedded CSS and the crowdfunding site, which both need a text input and inline form feedback for donation forms.
+
+  - `Input` — a single-size text input styled off `--vvp-*` tokens. Validation state is read from the native `aria-invalid` attribute rather than a bespoke prop, so it composes with whatever form library a consumer already uses.
+  - `Alert` — a plain feedback container (`neutral` | `error`), styled the same minimal way as `Card`: a border-only box, no solid fill.
+
+- [#24](https://github.com/Volksverpetzer/vvp_design_system/pull/24) [`14810c7`](https://github.com/Volksverpetzer/vvp_design_system/commit/14810c7d9f9fc5deb237bca5210db8156325c812) Thanks [@rejas](https://github.com/rejas)! - Add `Slider`, a single-thumb range control (audio/video scrubbing, volume, numeric filters) for consumers that need something interactive beyond the read-only `ProgressBar`. Wraps a native `<input type="range">` — keyboard, touch, and screen-reader support come for free — themed with the `--vvp-*` tokens the rest of `ui-web` already uses, with the filled portion driven by a CSS custom property computed from `value` rather than an extra DOM node. Motivated by `vvp_wp_audio_converter`'s audio player, which currently hand-rolls its seek bar with Radix `Slider` + Tailwind; no consumer has switched to it yet.
+
 ## 0.6.0
 
 ### Minor Changes
