@@ -5,7 +5,7 @@ import "./Slider.css";
 
 export interface SliderProps extends Omit<
   InputHTMLAttributes<HTMLInputElement>,
-  "type" | "value" | "onChange"
+  "type" | "value" | "defaultValue" | "onChange"
 > {
   value: number;
   min?: number;
@@ -25,7 +25,8 @@ export const Slider = forwardRef<HTMLInputElement, SliderProps>(function Slider(
   { value, min = 0, max, step = 1, onValueChange, className, style, ...rest },
   ref,
 ) {
-  const percent = max > min ? ((value - min) / (max - min)) * 100 : 0;
+  const rawPercent = max > min ? ((value - min) / (max - min)) * 100 : 0;
+  const percent = Math.min(100, Math.max(0, rawPercent));
   const classes = ["vvp-ui-slider", className].filter(Boolean).join(" ");
   const fillStyle = {
     ...style,
