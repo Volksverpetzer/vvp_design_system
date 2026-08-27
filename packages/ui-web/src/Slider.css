@@ -1,0 +1,60 @@
+.vvp-ui-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: var(--vvp-spacing-sm, 8px);
+  margin: 0;
+  border-radius: var(--vvp-radius-full, 9999px);
+  background: linear-gradient(
+    to right,
+    var(--vvp-primary, #1b7194) 0%,
+    var(--vvp-primary, #1b7194) var(--vvp-ui-slider-fill, 0%),
+    var(--vvp-surface, #e2f0f5) var(--vvp-ui-slider-fill, 0%),
+    var(--vvp-surface, #e2f0f5) 100%
+  );
+  cursor: pointer;
+}
+
+.vvp-ui-slider:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/*
+ * Thumb: duplicated across the -webkit-/-moz- pseudo-elements because
+ * browsers drop an entire rule if any selector in it is unsupported — they
+ * can't be combined into one shared rule.
+ */
+.vvp-ui-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: var(--vvp-spacing-lg, 16px);
+  height: var(--vvp-spacing-lg, 16px);
+  border-radius: var(--vvp-radius-full, 9999px);
+  background: var(--vvp-primary, #1b7194);
+  border: 2px solid var(--vvp-background, #fff);
+  box-shadow: var(--vvp-elevation-xs, 0px 1px 1.41px rgba(0, 0, 0, 0.2));
+  cursor: pointer;
+}
+
+.vvp-ui-slider::-moz-range-thumb {
+  width: var(--vvp-spacing-lg, 16px);
+  height: var(--vvp-spacing-lg, 16px);
+  border-radius: var(--vvp-radius-full, 9999px);
+  background: var(--vvp-primary, #1b7194);
+  border: 2px solid var(--vvp-background, #fff);
+  box-shadow: var(--vvp-elevation-xs, 0px 1px 1.41px rgba(0, 0, 0, 0.2));
+  cursor: pointer;
+}
+
+.vvp-ui-slider::-moz-range-track {
+  background: transparent;
+}
+
+.vvp-ui-slider:disabled::-webkit-slider-thumb {
+  cursor: not-allowed;
+}
+
+.vvp-ui-slider:disabled::-moz-range-thumb {
+  cursor: not-allowed;
+}
