@@ -1,5 +1,11 @@
 # @volksverpetzer/ui-web
 
+## 0.6.0
+
+### Minor Changes
+
+- [#19](https://github.com/Volksverpetzer/vvp_design_system/pull/19) [`cb431eb`](https://github.com/Volksverpetzer/vvp_design_system/commit/cb431eb48300c4cc77f7a5ebca5f81585e7e2d1f) Thanks [@rejas](https://github.com/rejas)! - Add a `size` prop to Badge (`"sm" | "md"`, default `"md"`). `md` matches vvp_divi5_extensions's category badges (Prüfpunkt, YouTube, Instagram, Podcast tags): `--vvp-font-size-base` (16px) rather than the compact `--vvp-font-size-xs` (12px) `sm` size. `md` is the default since it matches Badge's only real-world reference point; Badge has no other consumers yet, so this isn't a breaking change in practice.
+
 ## 0.5.0
 
 ### Minor Changes
