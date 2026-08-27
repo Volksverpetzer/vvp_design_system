@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
 
       - name: 📦 Install pnpm
         uses: pnpm/action-setup@v6
@@ -60,17 +62,35 @@ jobs:
             if git ls-remote --exit-code --tags origin "refs/tags/$tag" > /dev/null 2>&1; then
               continue
             fi
-            if ! npm view "$name@$version" version > /dev/null 2>&1; then
-              echo "$tag not on npm yet, skipping"
-              continue
+
+            npm_output=$(npm view "$name@$version" version 2>&1)
+            npm_status=$?
+            if [ $npm_status -ne 0 ]; then
+              if echo "$npm_output" | grep -q "E404"; then
+                echo "$tag not on npm yet, skipping"
+                continue
+              fi
+              echo "npm view failed unexpectedly for $tag, failing instead of assuming it's unpublished:"
+              echo "$npm_output"
+              exit 1
             fi
 
             if git rev-parse -q --verify "refs/tags/$tag" > /dev/null 2>&1; then
               echo "$tag exists locally but not on origin — pushing"
               git push origin "$tag"
-            else
-              echo "$tag is published on npm but untagged — creating and pushing it now"
-              git tag -a "$tag" -m "$tag"
-              git push origin "$tag"
+              continue
             fi
+
+            # Tag the commit that actually introduced this version, not opportunistically
+            # whatever commit this workflow run happens to be checked out at — a later,
+            # unrelated push could otherwise steal the tag onto the wrong commit.
+            commit=$(git log -1 --format=%H -S"\"version\": \"$version\"" -- "$pkg_json")
+            if [ -z "$commit" ]; then
+              echo "$tag is published on npm but no commit in history sets that exact version in $pkg_json — skipping rather than guessing"
+              continue
+            fi
+
+            echo "$tag is published on npm but untagged — creating it at $commit and pushing"
+            git tag -a "$tag" -m "$tag" "$commit"
+            git push origin "$tag"
           done
