@@ -8,7 +8,14 @@ import "./ThemeToggle.css";
 const STORAGE_KEY = "vvp-theme";
 const listeners = new Set<() => void>();
 
+// Session fallback for when localStorage throws (private/sandboxed
+// contexts): without it, setIsDark's write would fail silently and
+// getIsDark would keep re-deriving the same value from matchMedia on every
+// read, making the toggle look inert even though the click registered.
+let memoryIsDark: boolean | null = null;
+
 function getIsDark(): boolean {
+  if (memoryIsDark !== null) return memoryIsDark;
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) return stored === "dark";
@@ -39,11 +46,12 @@ function subscribe(callback: () => void) {
 }
 
 function setIsDark(next: boolean) {
+  memoryIsDark = next;
   try {
     localStorage.setItem(STORAGE_KEY, next ? "dark" : "light");
   } catch {
     // Storage unavailable — the toggle still works for this session via
-    // the in-memory listeners below, it just won't persist.
+    // memoryIsDark above, it just won't persist across reloads.
   }
   listeners.forEach((listener) => listener());
 }
