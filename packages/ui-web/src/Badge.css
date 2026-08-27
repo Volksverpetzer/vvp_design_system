@@ -1,21 +1,40 @@
 .vvp-ui-badge {
   display: inline-flex;
   align-items: center;
+  gap: var(--vvp-spacing-xs, 4px);
   border-radius: var(--vvp-radius-full, 9999px);
   padding: var(--vvp-spacing-xs, 4px) var(--vvp-spacing-sm, 8px);
   font-size: var(--vvp-font-size-xs, 12px);
-  font-weight: 700;
-  line-height: 1.2;
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
 }
 
+.vvp-ui-badge__icon {
+  display: inline-flex;
+  width: 0.8em;
+  height: 0.8em;
+}
+
+.vvp-ui-badge__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/*
+ * Soft/tinted style: a light tint of the variant color as background, the
+ * variant color itself as text — reads as a label, not a button. Tints are
+ * derived with color-mix() rather than separate "light" tokens, so they
+ * stay in sync with the source color automatically.
+ */
 .vvp-ui-badge--primary {
-  background: var(--vvp-primary, #1b7194);
-  color: var(--vvp-on-primary, #fff);
+  background: color-mix(in srgb, var(--vvp-primary, #1b7194) 15%, white);
+  color: var(--vvp-primary, #1b7194);
 }
 
 .vvp-ui-badge--accent {
-  background: var(--vvp-accent, #db2685);
-  color: var(--vvp-on-primary, #fff);
+  background: color-mix(in srgb, var(--vvp-accent, #db2685) 15%, white);
+  color: var(--vvp-accent, #db2685);
 }
 
 .vvp-ui-badge--neutral {
@@ -24,6 +43,11 @@
 }
 
 .vvp-ui-badge--error {
-  background: var(--vvp-error, #c62828);
-  color: var(--vvp-on-error, #fff);
+  background: color-mix(in srgb, var(--vvp-error, #c62828) 15%, white);
+  color: var(--vvp-error, #c62828);
+}
+
+.vvp-ui-badge--pruefpunkt {
+  background: color-mix(in srgb, var(--vvp-pruefpunkt, #442674) 15%, white);
+  color: var(--vvp-pruefpunkt, #442674);
 }

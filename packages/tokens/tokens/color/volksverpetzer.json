@@ -13,7 +13,8 @@
       "primary": { "$value": "#1B7194", "$type": "color" },
       "primaryMuted": { "$value": "#3893C0", "$type": "color" },
       "accent": { "$value": "#DB2685", "$type": "color" },
-      "error": { "$value": "#C62828", "$type": "color" }
+      "error": { "$value": "#C62828", "$type": "color" },
+      "pruefpunkt": { "$value": "#442674", "$type": "color" }
     },
     "dark": {
       "background": { "$value": "#050D0f", "$type": "color" },
@@ -28,7 +29,8 @@
       "primary": { "$value": "#3893C0", "$type": "color" },
       "primaryMuted": { "$value": "#1B7194", "$type": "color" },
       "accent": { "$value": "#D31C74", "$type": "color" },
-      "error": { "$value": "#EF5350", "$type": "color" }
+      "error": { "$value": "#EF5350", "$type": "color" },
+      "pruefpunkt": { "$value": "#8B5CF6", "$type": "color" }
     }
   }
 }
