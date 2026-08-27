@@ -1,19 +1,26 @@
+/*
+ * radius/border-color/padding are pinned to whichever existing token lands
+ * closest to vvp_crowdfunding's donation-form input (the component's actual
+ * first real consumer, pre-dating this package): radius 14px sits exactly
+ * between md/lg, resolved to md since that's the scale's own "buttons and
+ * form controls" step; padding 14px/16px both round to lg; the border color
+ * (#d8e6ee) is closer to --vvp-surface than the likelier-sounding
+ * --vvp-surface-input by actual RGB distance (~16 vs ~32).
+ */
 .vvp-ui-input {
   display: block;
   box-sizing: border-box;
   width: 100%;
   min-width: 0;
-  border-radius: var(--vvp-radius-sm, 8px);
-  border: 1px solid var(--vvp-surface-input, #badde8);
+  border-radius: var(--vvp-radius-md, 12px);
+  border: 1px solid var(--vvp-surface, #e2f0f5);
   background: var(--vvp-background, #fff);
   color: var(--vvp-text, #111);
-  padding: var(--vvp-spacing-sm, 8px) var(--vvp-spacing-md, 10px);
+  padding: var(--vvp-spacing-lg, 16px);
   font-family: inherit;
   font-size: var(--vvp-font-size-base, 16px);
   line-height: 1.4;
-  transition:
-    border-color 0.15s ease,
-    box-shadow 0.15s ease;
+  transition: border-color 0.15s ease;
 }
 
 .vvp-ui-input::placeholder {
@@ -21,10 +28,8 @@
 }
 
 .vvp-ui-input:focus-visible {
-  outline: none;
-  border-color: var(--vvp-primary, #1b7194);
-  box-shadow: 0 0 0 3px
-    color-mix(in srgb, var(--vvp-primary, #1b7194) 25%, transparent);
+  outline: 2px solid var(--vvp-primary-muted, #3893c0);
+  outline-offset: 2px;
 }
 
 .vvp-ui-input:disabled {
@@ -43,6 +48,5 @@
 }
 
 .vvp-ui-input[aria-invalid="true"]:focus-visible {
-  box-shadow: 0 0 0 3px
-    color-mix(in srgb, var(--vvp-error, #c62828) 25%, transparent);
+  outline-color: var(--vvp-error, #c62828);
 }
