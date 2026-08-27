@@ -4,10 +4,17 @@
   gap: var(--vvp-spacing-xs, 4px);
   border-radius: var(--vvp-radius-full, 9999px);
   padding: var(--vvp-spacing-xs, 4px) var(--vvp-spacing-sm, 8px);
-  font-size: var(--vvp-font-size-xs, 12px);
   font-weight: 600;
   line-height: 1.4;
   white-space: nowrap;
+}
+
+.vvp-ui-badge--size-sm {
+  font-size: var(--vvp-font-size-xs, 12px);
+}
+
+.vvp-ui-badge--size-md {
+  font-size: var(--vvp-font-size-base, 16px);
 }
 
 .vvp-ui-badge__icon {
