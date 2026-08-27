@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
 
       - name: 📦 Install pnpm
         uses: pnpm/action-setup@v6
@@ -46,26 +48,84 @@ jobs:
 
       - name: 🏷️ Ensure published packages are tagged
         run: |
-          packages='${{ steps.changesets.outputs.publishedPackages }}'
-          if [ -z "$packages" ] || [ "$packages" = "[]" ]; then
-            echo "No published packages reported, nothing to tag"
-            exit 0
-          fi
-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          echo "$packages" | jq -c '.[]' | while read -r pkg; do
-            name=$(echo "$pkg" | jq -r '.name')
-            version=$(echo "$pkg" | jq -r '.version')
+
+          failed=0
+
+          for pkg_json in packages/*/package.json; do
+            if [ "$(jq -r '.private // false' "$pkg_json")" = "true" ]; then
+              continue
+            fi
+            # Guarded the same way as the npm_output/candidate_version reads below: a
+            # bad package.json here would otherwise hard-abort the whole step under -e.
+            name=$(jq -r '.name' "$pkg_json") || { echo "Failed to read .name from $pkg_json"; exit 1; }
+            version=$(jq -r '.version' "$pkg_json") || { echo "Failed to read .version from $pkg_json"; exit 1; }
             tag="$name@$version"
+
             if git ls-remote --exit-code --tags origin "refs/tags/$tag" > /dev/null 2>&1; then
-              echo "Tag $tag already exists on origin, skipping"
-            elif git rev-parse -q --verify "refs/tags/$tag" > /dev/null 2>&1; then
-              echo "changeset publish already created $tag locally but didn't push it — pushing now"
-              git push origin "$tag"
-            else
-              echo "Tag $tag missing entirely — creating and pushing it now"
-              git tag -a "$tag" -m "$tag"
-              git push origin "$tag"
+              continue
+            fi
+
+            # `&& npm_status=0 || npm_status=$?` (rather than a plain `npm_status=$?` on
+            # the next line) keeps this list exempt from the shell's default -e, since a
+            # non-zero exit here — including the everyday E404 for an unpublished version
+            # — is expected and handled below, not a reason to abort the step.
+            npm_output=$(npm view "$name@$version" version 2>&1) && npm_status=0 || npm_status=$?
+            if [ $npm_status -ne 0 ]; then
+              if echo "$npm_output" | grep -q "E404"; then
+                echo "$tag not on npm yet, skipping"
+                continue
+              fi
+              echo "npm view failed unexpectedly for $tag, failing instead of assuming it's unpublished:"
+              echo "$npm_output"
+              exit 1
+            fi
+
+            if git rev-parse -q --verify "refs/tags/$tag" > /dev/null 2>&1; then
+              echo "$tag exists locally but not on origin — pushing"
+              # A push failure here shouldn't take the rest of the packages in this
+              # loop down with it — record it and keep going, then fail the step
+              # afterwards so the run is still reported as failed.
+              if ! git push origin "$tag"; then
+                echo "Failed to push $tag, continuing with other packages"
+                failed=1
+              fi
+              continue
+            fi
+
+            # Tag the commit that actually introduced this version, not opportunistically
+            # whatever commit this workflow run happens to be checked out at — a later,
+            # unrelated push could otherwise steal the tag onto the wrong commit.
+            # Walk commits touching this file (newest first) and compare the parsed
+            # .version at each one — not a text/pickaxe match, so it doesn't depend on
+            # package.json's formatting. Keep descending while the version still matches
+            # $version; the last (oldest) match in that run is the commit that introduced it.
+            # `|| candidate_version=""` guards against the pipeline failing (e.g. the
+            # file didn't exist yet, or was unparseable, at that revision) hard-aborting
+            # the step under this shell's default -e/pipefail — an empty value just
+            # fails the comparison below and stops the walk like any other mismatch.
+            commit=""
+            for candidate in $(git log --format=%H -- "$pkg_json"); do
+              candidate_version=$(git show "$candidate:$pkg_json" 2>/dev/null | jq -r '.version // empty' 2>/dev/null) || candidate_version=""
+              if [ "$candidate_version" = "$version" ]; then
+                commit="$candidate"
+              else
+                break
+              fi
+            done
+            if [ -z "$commit" ]; then
+              echo "$tag is published on npm but no commit in history sets that exact version in $pkg_json — skipping rather than guessing"
+              continue
+            fi
+
+            echo "$tag is published on npm but untagged — creating it at $commit and pushing"
+            if ! git tag -a "$tag" -m "$tag" "$commit" || ! git push origin "$tag"; then
+              echo "Failed to tag/push $tag, continuing with other packages"
+              failed=1
             fi
           done
+
+          if [ "$failed" -eq 1 ]; then
+            exit 1
+          fi
