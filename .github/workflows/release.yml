@@ -67,6 +67,27 @@ jobs:
               continue
             fi
 
+            # Check for a tag changeset publish already created locally in this same
+            # job/checkout BEFORE asking npm. npm's registry has read-after-write lag —
+            # querying it seconds after a publish in the same job can still 404 even
+            # though the package is live and the local tag already exists — so treating
+            # a local-tag miss as gospel here would skip work that's already done.
+            if git rev-parse -q --verify "refs/tags/$tag" > /dev/null 2>&1; then
+              echo "$tag exists locally but not on origin — pushing"
+              # A push failure here shouldn't take the rest of the packages in this
+              # loop down with it — record it and keep going, then fail the step
+              # afterwards so the run is still reported as failed.
+              if ! git push origin "$tag"; then
+                echo "Failed to push $tag, continuing with other packages"
+                failed=1
+              fi
+              continue
+            fi
+
+            # No local tag either — fall back to asking npm, only reachable now for a
+            # package that wasn't just published in this same job (e.g. a later run
+            # self-healing a gap from an earlier failed push), where npm has had time
+            # to catch up.
             # `&& npm_status=0 || npm_status=$?` (rather than a plain `npm_status=$?` on
             # the next line) keeps this list exempt from the shell's default -e, since a
             # non-zero exit here — including the everyday E404 for an unpublished version
@@ -80,18 +101,6 @@ jobs:
               echo "npm view failed unexpectedly for $tag, failing instead of assuming it's unpublished:"
               echo "$npm_output"
               exit 1
-            fi
-
-            if git rev-parse -q --verify "refs/tags/$tag" > /dev/null 2>&1; then
-              echo "$tag exists locally but not on origin — pushing"
-              # A push failure here shouldn't take the rest of the packages in this
-              # loop down with it — record it and keep going, then fail the step
-              # afterwards so the run is still reported as failed.
-              if ! git push origin "$tag"; then
-                echo "Failed to push $tag, continuing with other packages"
-                failed=1
-              fi
-              continue
             fi
 
             # Tag the commit that actually introduced this version, not opportunistically
