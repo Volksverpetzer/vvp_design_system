@@ -84,7 +84,16 @@ jobs:
             # Tag the commit that actually introduced this version, not opportunistically
             # whatever commit this workflow run happens to be checked out at — a later,
             # unrelated push could otherwise steal the tag onto the wrong commit.
-            commit=$(git log -1 --format=%H -S"\"version\": \"$version\"" -- "$pkg_json")
+            # -S matches commits that added OR removed the line, so once a later commit
+            # bumps past $version, the most recent hit is that later (removing) commit —
+            # filter to the hit that actually added the line.
+            commit=""
+            for candidate in $(git log --format=%H -S"\"version\": \"$version\"" -- "$pkg_json"); do
+              if git show "$candidate" -- "$pkg_json" | grep -E '^\+[^+]' | grep -qF "\"version\": \"$version\""; then
+                commit="$candidate"
+                break
+              fi
+            done
             if [ -z "$commit" ]; then
               echo "$tag is published on npm but no commit in history sets that exact version in $pkg_json — skipping rather than guessing"
               continue
