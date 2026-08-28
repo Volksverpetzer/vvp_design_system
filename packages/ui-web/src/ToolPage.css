@@ -1,0 +1,113 @@
+.vvp-ui-tool-page {
+  position: relative;
+  min-height: 100vh;
+  background: var(--vvp-background, #fff);
+  overflow: hidden;
+}
+
+.vvp-ui-tool-page__background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 220px;
+  overflow: hidden;
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+}
+
+.vvp-ui-tool-page__background svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.vvp-ui-tool-page__topbar {
+  position: fixed;
+  top: var(--vvp-spacing-lg, 16px);
+  right: var(--vvp-spacing-lg, 16px);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: var(--vvp-spacing-sm, 8px);
+}
+
+/* ThemeToggle self-positions fixed top-right; inside our own topbar it
+   should lay out with the GitHub link instead, so it's un-fixed here. */
+.vvp-ui-tool-page__topbar .vvp-ui-theme-toggle {
+  position: static;
+  top: auto;
+  right: auto;
+}
+
+.vvp-ui-tool-page__icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vvp-ui-tool-page__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: var(--vvp-spacing-huge, 40px) var(--vvp-spacing-lg, 16px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--vvp-spacing-xl, 20px);
+}
+
+/* Matches ai.volksverpetzer.de's pre-results state: the header/content/
+   tags/help block sits in the vertical middle of the viewport rather than
+   pinned to the top. */
+.vvp-ui-tool-page__inner--centered {
+  min-height: 70vh;
+  justify-content: center;
+}
+
+.vvp-ui-tool-page__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--vvp-spacing-sm, 8px);
+  text-align: center;
+}
+
+.vvp-ui-tool-page__title {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--vvp-spacing-sm, 8px);
+  font-size: var(--vvp-font-size-xxxl, 30px);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--vvp-text, #111);
+}
+
+.vvp-ui-tool-page__icon {
+  display: inline-flex;
+  align-items: center;
+  color: var(--vvp-primary, #1b7194);
+}
+
+.vvp-ui-tool-page__tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--vvp-spacing-xs, 4px);
+}
+
+.vvp-ui-tool-page__content {
+  width: 100%;
+}
+
+.vvp-ui-tool-page__help {
+  margin: 0;
+  text-align: center;
+  font-size: var(--vvp-font-size-sm, 14px);
+  color: var(--vvp-text-muted, #666);
+}
