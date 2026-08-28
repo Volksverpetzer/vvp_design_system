@@ -1,5 +1,13 @@
 # @volksverpetzer/ui-web
 
+## 0.10.0
+
+### Minor Changes
+
+- [#32](https://github.com/Volksverpetzer/vvp_design_system/pull/32) [`7c0e993`](https://github.com/Volksverpetzer/vvp_design_system/commit/7c0e9933c4a0596c2fe9cfba7ac2d7ac0155e6b1) Thanks [@rejas](https://github.com/rejas)! - Add `InputButton`, an `Input` with a primary action button embedded in its right edge — the "paste a value and go" pattern (a URL shortener, an email signup field). Moved out of vvp_link_shortener, which had been hand-positioning a separate `Input` and `Button` with inline styles for the merged look.
+
+  Composes the existing `Input` and `Button` (`variant="primary"`, `size="sm"`, `type="submit"`) rather than inventing new styling, and measures the button's own rendered width to reserve exactly that much padding on the input, so a longer label (e.g. a "Shortening…" loading state) never overlaps typed text.
+
 ## 0.9.0
 
 ### Minor Changes
