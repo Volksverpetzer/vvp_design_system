@@ -48,14 +48,30 @@ export function cssFontFamily({ dictionary }) {
  * Emits ready-to-use `:root { --vvp-elevation-x: 0px Ypx Bpx rgba(...); }`
  * box-shadow values (one property per step, not decomposed) — used directly
  * as `box-shadow: var(--vvp-elevation-x)`. Color is always neutral black;
- * brand-colored shadows are a local, app-specific choice, not part of this
- * scale.
+ * see `cssElevationAccentVars` below for the brand-tinted exception.
  */
 export function cssElevationVars({ dictionary }) {
   const lines = dictionary.allTokens.map((token) => {
     const key = token.path[token.path.length - 1];
     const { offsetY, blur, opacity } = token.original.$value;
     return `  --vvp-elevation-${key}: 0px ${offsetY}px ${blur}px rgba(0, 0, 0, ${opacity});`;
+  });
+  return `:root {\n${lines.join("\n")}\n}\n`;
+}
+
+/**
+ * Emits `:root { --vvp-elevation-accent-x: 0px Ypx Bpx color-mix(...); }` —
+ * the one deliberate exception to the neutral-black rule above. Color is
+ * always `--vvp-primary-muted` (so it tracks the active brand and light/dark
+ * mode automatically) at a per-step tint percentage, not a literal color, so
+ * this can't be expressed in the plain `offsetY/blur/opacity` shape the
+ * neutral scale uses.
+ */
+export function cssElevationAccentVars({ dictionary }) {
+  const lines = dictionary.allTokens.map((token) => {
+    const key = token.path[token.path.length - 1];
+    const { offsetY, blur, tint } = token.original.$value;
+    return `  --vvp-elevation-accent-${key}: 0px ${offsetY}px ${blur}px color-mix(in srgb, var(--vvp-primary-muted, #3893c0) ${tint}%, transparent);`;
   });
   return `:root {\n${lines.join("\n")}\n}\n`;
 }

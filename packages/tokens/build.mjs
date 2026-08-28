@@ -13,6 +13,7 @@ import {
   cssScaleVars,
   cssFontFamily,
   cssElevationVars,
+  cssElevationAccentVars,
 } from "./formats/css-vars.mjs";
 import { scssBrandVars } from "./formats/scss-vars.mjs";
 
@@ -43,6 +44,10 @@ StyleDictionary.registerFormat({
 StyleDictionary.registerFormat({
   name: "css/elevation-vars",
   format: cssElevationVars,
+});
+StyleDictionary.registerFormat({
+  name: "css/elevation-accent-vars",
+  format: cssElevationAccentVars,
 });
 StyleDictionary.registerFormat({
   name: "scss/brand-vars",
@@ -221,9 +226,9 @@ async function buildIconSizes() {
 const ELEVATION_HEADER = `Central elevation/shadow scale for the app.
 
 Every drop-shadow should come from this scale so surfaces read as one
-consistent depth system. Color is always neutral black — a brand-colored
-shadow (e.g. a pink CTA glow) is a local, one-off design choice, not part of
-this scale, and should stay hand-written at the call site.
+consistent depth system. Color is always neutral black — for the brand-tinted
+exception (a CTA glow, not a depth cue), see elevation-accent.json /
+--vvp-elevation-accent-*.
 
 Source of truth: vvp_design_system/packages/tokens/tokens/elevation.json`;
 
@@ -247,6 +252,26 @@ async function buildElevation() {
         transformGroup: "css",
         buildPath: "dist/css/",
         files: [{ destination: "elevation.css", format: "css/elevation-vars" }],
+      },
+    },
+  });
+  await sd.buildAllPlatforms();
+}
+
+async function buildElevationAccent() {
+  const sd = new StyleDictionary({
+    usesDtcg: true,
+    source: ["tokens/elevation-accent.json"],
+    platforms: {
+      css: {
+        transformGroup: "css",
+        buildPath: "dist/css/",
+        files: [
+          {
+            destination: "elevation-accent.css",
+            format: "css/elevation-accent-vars",
+          },
+        ],
       },
     },
   });
@@ -336,6 +361,7 @@ await buildIconSizes();
 await buildFontSizes();
 await buildFontFamily();
 await buildElevation();
+await buildElevationAccent();
 await buildColorBrand("volksverpetzer");
 await buildColorBrand("mimikama");
 
