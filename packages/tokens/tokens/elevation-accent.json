@@ -1,0 +1,12 @@
+{
+  "elevationAccent": {
+    "rest": {
+      "$value": { "offsetY": 8, "blur": 20, "tint": 6 },
+      "$description": "Rest state for a brand-tinted glow shadow (e.g. LinkButton's outline style) — a deliberate exception to elevation.json's neutral-black rule for the rare case a shadow needs to read as an accent glow, not a depth cue. Geometry matches elevation.lg; color comes from --vvp-primary-muted at low opacity instead of black."
+    },
+    "hover": {
+      "$value": { "offsetY": 8, "blur": 20, "tint": 18 },
+      "$description": "Hover/emphasis state for the same glow: identical geometry, stronger tint — intensity carries the emphasis instead of growing the shadow past elevation.lg's size."
+    }
+  }
+}
