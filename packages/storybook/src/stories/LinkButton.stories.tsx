@@ -6,16 +6,11 @@ const meta: Meta<typeof LinkButton> = {
   component: LinkButton,
   tags: ["autodocs"],
   args: {
-    children: "LinkButton",
-    variant: "primary",
+    children: "Dauerhaft unterstützen",
     size: "md",
     href: "#",
   },
   argTypes: {
-    variant: {
-      control: "select",
-      options: ["primary", "secondary", "ghost", "accent"],
-    },
     size: {
       control: "select",
       options: ["sm", "md", "lg"],
@@ -26,31 +21,7 @@ const meta: Meta<typeof LinkButton> = {
 export default meta;
 type Story = StoryObj<typeof LinkButton>;
 
-export const Primary: Story = {};
-
-export const Secondary: Story = {
-  args: { variant: "secondary" },
-};
-
-export const Ghost: Story = {
-  args: { variant: "ghost", children: "Dauerhaft unterstützen" },
-};
-
-export const Accent: Story = {
-  args: { variant: "accent" },
-};
-
-export const AllVariants: Story = {
-  render: (args) => (
-    <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-      {(["primary", "secondary", "ghost", "accent"] as const).map((variant) => (
-        <LinkButton key={variant} {...args} variant={variant}>
-          {variant}
-        </LinkButton>
-      ))}
-    </div>
-  ),
-};
+export const Default: Story = {};
 
 export const AllSizes: Story = {
   render: (args) => (

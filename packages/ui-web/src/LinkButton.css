@@ -1,0 +1,27 @@
+/*
+ * LinkButton's fixed look: a subtle bordered "pill card" with a soft
+ * drop shadow, distinct from Button's ghost variant (see LinkButton.tsx
+ * for why). Colors are expressed via the same --vvp-* tokens Button.css
+ * uses, so this stays in sync with the shared palette automatically.
+ */
+.vvp-ui-linkbtn {
+  border-radius: var(--vvp-radius-md, 12px);
+  background: transparent;
+  color: var(--vvp-primary, #1b7194);
+  border: 1.5px solid var(--vvp-surface, #e2f0f5);
+  box-shadow: 0 8px 18px
+    color-mix(in srgb, var(--vvp-primary-muted, #3893c0) 6%, transparent);
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease,
+    border-color 120ms ease,
+    background 120ms ease;
+}
+
+.vvp-ui-linkbtn:hover {
+  transform: translateY(-1px);
+  border-color: var(--vvp-primary-muted, #3893c0);
+  background: var(--vvp-surface, #e2f0f5);
+  box-shadow: 0 12px 26px
+    color-mix(in srgb, var(--vvp-primary-muted, #3893c0) 18%, transparent);
+}
