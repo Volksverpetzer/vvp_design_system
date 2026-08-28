@@ -13,7 +13,14 @@ import { join } from "node:path";
 const srcDir = "src";
 const distDir = "dist";
 
-const cssFiles = readdirSync(srcDir).filter((f) => f.endsWith(".css"));
+// Sorted explicitly: readdirSync's order is platform/filesystem-dependent,
+// not guaranteed alphabetical, and dist/styles.css concatenates these
+// rules into one cascade — an unstable order can silently flip which
+// same-specificity rule wins (e.g. a component's own class vs. a shared
+// base class it depends on being overridden last).
+const cssFiles = readdirSync(srcDir)
+  .filter((f) => f.endsWith(".css"))
+  .sort();
 
 let combined = "";
 for (const file of cssFiles) {

@@ -3,13 +3,20 @@
  * drop shadow, distinct from Button's ghost variant (see LinkButton.tsx
  * for why). Colors are expressed via the same --vvp-* tokens Button.css
  * uses, so this stays in sync with the shared palette automatically.
+ *
+ * The shadow is a brand-tinted glow rather than the neutral depth cue
+ * --vvp-elevation-* covers (that scale is all rgba(0,0,0,...)), so it
+ * can't reuse those tokens directly — but its offset/blur geometry is
+ * aligned to --vvp-elevation-lg's (8px / 20px), the scale's top step,
+ * rather than an arbitrary value. Hover intensifies via the tint
+ * percentage and a lift instead of growing past that step.
  */
 .vvp-ui-linkbtn {
   border-radius: var(--vvp-radius-md, 12px);
   background: transparent;
   color: var(--vvp-primary, #1b7194);
   border: 1.5px solid var(--vvp-surface, #e2f0f5);
-  box-shadow: 0 8px 18px
+  box-shadow: 0 8px 20px
     color-mix(in srgb, var(--vvp-primary-muted, #3893c0) 6%, transparent);
   transition:
     transform 120ms ease,
@@ -22,6 +29,6 @@
   transform: translateY(-1px);
   border-color: var(--vvp-primary-muted, #3893c0);
   background: var(--vvp-surface, #e2f0f5);
-  box-shadow: 0 12px 26px
+  box-shadow: 0 8px 20px
     color-mix(in srgb, var(--vvp-primary-muted, #3893c0) 18%, transparent);
 }
