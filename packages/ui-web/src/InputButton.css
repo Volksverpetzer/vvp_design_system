@@ -1,0 +1,25 @@
+.vvp-ui-input-button {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+/*
+ * Compound selectors (rather than relying on file load order) so these
+ * reliably win over Input's and Button's own same-specificity base rules
+ * regardless of how the package's CSS files get concatenated.
+ */
+.vvp-ui-input-button__field.vvp-ui-input {
+  padding-right: 7rem;
+}
+
+.vvp-ui-input-button__action.vvp-ui-btn {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  bottom: 2px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: var(--vvp-radius-md, 12px);
+  border-bottom-right-radius: var(--vvp-radius-md, 12px);
+}
