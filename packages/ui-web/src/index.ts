@@ -17,4 +17,4 @@ export { Alert, type AlertProps, type AlertVariant } from "./Alert";
 export { Slider, type SliderProps } from "./Slider";
 export { ThemeToggle } from "./ThemeToggle";
 export { InputButton, type InputButtonProps } from "./InputButton";
-export { PageHeader, type PageHeaderProps } from "./PageHeader";
+export { ToolPage, type ToolPageProps, type ToolPageTag } from "./ToolPage";
