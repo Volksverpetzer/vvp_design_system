@@ -5,6 +5,7 @@ import type { ButtonSize, ButtonVariant } from "./Button";
 import "./Button.css";
 
 export interface LinkButtonProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+  href: string;
   variant?: ButtonVariant;
   size?: ButtonSize;
   children: ReactNode;
