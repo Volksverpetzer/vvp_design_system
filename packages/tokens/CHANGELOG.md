@@ -1,5 +1,17 @@
 # @volksverpetzer/design-tokens
 
+## 0.7.0
+
+### Minor Changes
+
+- [#30](https://github.com/Volksverpetzer/vvp_design_system/pull/30) [`363d5f0`](https://github.com/Volksverpetzer/vvp_design_system/commit/363d5f07a7bc142129cd8704d9e195fe88d22a1d) Thanks [@rejas](https://github.com/rejas)! - Add `--vvp-elevation-accent-rest` / `--vvp-elevation-accent-hover` — a
+  brand-tinted shadow scale, the one deliberate exception to the existing
+  `--vvp-elevation-*` scale's neutral-black rule. For a shadow that should
+  read as an accent glow (e.g. `LinkButton`'s outline style) rather than a
+  depth cue. Color is always `--vvp-primary-muted`, so it tracks the active
+  brand and light/dark mode automatically. CSS output only for now — no
+  React Native platform, since there's no RN consumer yet.
+
 ## 0.6.0
 
 ### Minor Changes

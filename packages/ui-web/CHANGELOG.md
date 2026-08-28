@@ -1,5 +1,22 @@
 # @volksverpetzer/ui-web
 
+## 0.9.0
+
+### Minor Changes
+
+- [#30](https://github.com/Volksverpetzer/vvp_design_system/pull/30) [`363d5f0`](https://github.com/Volksverpetzer/vvp_design_system/commit/363d5f07a7bc142129cd8704d9e195fe88d22a1d) Thanks [@rejas](https://github.com/rejas)! - Add `LinkButton` — an anchor-based counterpart to `Button`, rendered as
+  an `<a>` instead of a `<button>`. For navigation (external links,
+  downloads) where an actual link is the correct element, not a button
+  with a location-changing `onClick`. Unlike `Button`, it has no
+  `variant` choice: it always renders one bordered, low-emphasis look
+  (a link is inherently a secondary/tertiary action, never a page's
+  primary CTA), only `size` is configurable.
+
+  Its shadow comes from `@volksverpetzer/design-tokens`'
+  `--vvp-elevation-accent-rest`/`-hover` (added alongside this) with a
+  matching literal fallback, so it still renders correctly for apps on an
+  older `design-tokens` version that hasn't loaded that token yet.
+
 ## 0.8.0
 
 ### Minor Changes
