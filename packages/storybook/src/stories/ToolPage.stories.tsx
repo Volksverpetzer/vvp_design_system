@@ -64,3 +64,16 @@ export const NoBackground: Story = {
 export const NoGithubLink: Story = {
   args: { githubUrl: undefined },
 };
+
+export const Centered: Story = {
+  name: "Centered (pre-results look)",
+  args: {
+    centered: true,
+    helpText: undefined,
+    children: (
+      <div style={{ maxWidth: 480, margin: "0 auto" }}>
+        <Card bordered>Search input goes here</Card>
+      </div>
+    ),
+  },
+};

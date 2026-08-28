@@ -39,6 +39,15 @@ export interface ToolPageProps extends Omit<
   githubUrl?: string;
   /** @default true */
   background?: boolean;
+  /**
+   * Vertically centers the icon/title/tags/content/helpText block in the
+   * middle of the viewport — the pre-results look on ai.volksverpetzer.de.
+   * Turn off once there's enough content that top-aligning it reads better
+   * (e.g. a long list) — this is a static flag, not a scroll-based one, so
+   * the caller decides when that switch happens.
+   * @default false
+   */
+  centered?: boolean;
 }
 
 /**
@@ -57,10 +66,17 @@ export function ToolPage({
   helpText,
   githubUrl,
   background = true,
+  centered = false,
   className,
   ...rest
 }: ToolPageProps) {
   const classes = ["vvp-ui-tool-page", className].filter(Boolean).join(" ");
+  const innerClasses = [
+    "vvp-ui-tool-page__inner",
+    centered && "vvp-ui-tool-page__inner--centered",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <div className={classes} {...rest}>
@@ -91,7 +107,7 @@ export function ToolPage({
         <ThemeToggle />
       </div>
 
-      <div className="vvp-ui-tool-page__inner">
+      <div className={innerClasses}>
         <div className="vvp-ui-tool-page__header">
           <h1 className="vvp-ui-tool-page__title">
             {icon ? (
