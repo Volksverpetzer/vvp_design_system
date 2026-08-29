@@ -1,5 +1,18 @@
 # @volksverpetzer/ui-web
 
+## 0.12.0
+
+### Minor Changes
+
+- [#37](https://github.com/Volksverpetzer/vvp_design_system/pull/37) [`54edb24`](https://github.com/Volksverpetzer/vvp_design_system/commit/54edb24dd01dcb10fede1ca34c96d94c387a4011) Thanks [@rejas](https://github.com/rejas)! - Add `headerImage` to `ToolPage` — a full-width banner rendered above the
+  title/content in normal document flow, for pages with a real photo
+  banner (e.g. a campaign image) instead of the decorative jagged
+  background shape. Takes precedence over `background` when set.
+
+### Patch Changes
+
+- [#38](https://github.com/Volksverpetzer/vvp_design_system/pull/38) [`7d922e5`](https://github.com/Volksverpetzer/vvp_design_system/commit/7d922e55d23d53edb054393a0ef8dc1f795f948e) Thanks [@rejas](https://github.com/rejas)! - Fix `ToolPage`'s centered title running right up under the fixed top-right topbar (`ThemeToggle`/GitHub link) on mobile — the default 40px top padding was already less than the topbar's own 16px offset plus button height. Below 640px, push the content down further so the title clears it.
+
 ## 0.11.0
 
 ### Minor Changes
