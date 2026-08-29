@@ -29,7 +29,7 @@ export interface ToolPageProps extends Omit<
 > {
   icon?: ReactNode;
   title: ReactNode;
-  /** Small badges rendered below the title, e.g. feature/category tags. */
+  /** Small badges rendered below `children`, e.g. feature/category tags. */
   tags?: ToolPageTag[];
   /** The page's actual content — a search input, an audio list, a form. */
   children: ReactNode;
@@ -53,8 +53,8 @@ export interface ToolPageProps extends Omit<
 /**
  * Full-page shell for a single-purpose tool page — the pattern shared by
  * ai.volksverpetzer.de (icon + centered title, a search input, tag pills)
- * and this app's audio converter list. Centered icon/title/tags header,
- * full-width content slot, optional help text below it, a fixed top-right
+ * and this app's audio converter list. Centered icon/title header,
+ * full-width content slot, tags and help text below it, a fixed top-right
  * corner with `ThemeToggle` and an optional GitHub link, and (by default)
  * a decorative jagged brand-blue shape along the top edge.
  */
@@ -117,18 +117,19 @@ export function ToolPage({
             ) : null}
             {title}
           </h1>
-          {tags && tags.length > 0 ? (
-            <div className="vvp-ui-tool-page__tags">
-              {tags.map((tag, index) => (
-                <Badge key={index} variant={tag.variant ?? "neutral"} size="sm">
-                  {tag.label}
-                </Badge>
-              ))}
-            </div>
-          ) : null}
         </div>
 
         <div className="vvp-ui-tool-page__content">{children}</div>
+
+        {tags && tags.length > 0 ? (
+          <div className="vvp-ui-tool-page__tags">
+            {tags.map((tag, index) => (
+              <Badge key={index} variant={tag.variant ?? "neutral"} size="sm">
+                {tag.label}
+              </Badge>
+            ))}
+          </div>
+        ) : null}
 
         {helpText ? <p className="vvp-ui-tool-page__help">{helpText}</p> : null}
       </div>
