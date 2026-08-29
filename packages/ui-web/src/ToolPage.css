@@ -60,6 +60,18 @@
   gap: var(--vvp-spacing-xl, 20px);
 }
 
+/*
+ * Below ~640px the centered title runs the full viewport width and can
+ * reach right up under the fixed topbar (its ~16px offset + button height
+ * already eats into the default 40px top padding on its own). Push content
+ * down far enough to clear it instead of just the topbar's top offset.
+ */
+@media (max-width: 640px) {
+  .vvp-ui-tool-page__inner {
+    padding-top: calc(var(--vvp-spacing-huge, 40px) * 2);
+  }
+}
+
 /* Matches ai.volksverpetzer.de's pre-results state: the header/content/
    tags/help block sits in the vertical middle of the viewport rather than
    pinned to the top. */
