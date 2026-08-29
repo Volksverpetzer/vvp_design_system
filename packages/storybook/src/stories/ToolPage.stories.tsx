@@ -61,6 +61,21 @@ export const NoBackground: Story = {
   args: { background: false },
 };
 
+const PLACEHOLDER_BANNER =
+  "data:image/svg+xml;utf8," +
+  encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="360"><rect width="1440" height="360" fill="#1b7194"/><text x="50%" y="50%" fill="white" font-family="sans-serif" font-size="32" text-anchor="middle" dominant-baseline="middle">Header image</text></svg>',
+  );
+
+export const WithHeaderImage: Story = {
+  name: "With header image (instead of the jagged background)",
+  args: {
+    headerImage: (
+      <img src={PLACEHOLDER_BANNER} alt="" width={1440} height={360} />
+    ),
+  },
+};
+
 export const NoGithubLink: Story = {
   args: { githubUrl: undefined },
 };
