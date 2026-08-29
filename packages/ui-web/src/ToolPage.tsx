@@ -40,6 +40,14 @@ export interface ToolPageProps extends Omit<
   /** @default true */
   background?: boolean;
   /**
+   * Full-width header image (e.g. a campaign banner), rendered above the
+   * title/content in normal document flow instead of the decorative
+   * jagged background shape — pass whatever `<img>`/`<Image>` element
+   * fits the consuming framework. Takes precedence over `background`
+   * when set (mutually exclusive, not layered).
+   */
+  headerImage?: ReactNode;
+  /**
    * Vertically centers the icon/title/tags/content/helpText block in the
    * middle of the viewport — the pre-results look on ai.volksverpetzer.de.
    * Turn off once there's enough content that top-aligning it reads better
@@ -56,7 +64,9 @@ export interface ToolPageProps extends Omit<
  * and this app's audio converter list. Centered icon/title/tags header,
  * full-width content slot, optional help text below it, a fixed top-right
  * corner with `ThemeToggle` and an optional GitHub link, and (by default)
- * a decorative jagged brand-blue shape along the top edge.
+ * a decorative jagged brand-blue shape along the top edge — or a full-width
+ * `headerImage` in its place for pages with a real banner (e.g. a campaign
+ * photo) instead of the abstract shape.
  */
 export function ToolPage({
   icon,
@@ -66,6 +76,7 @@ export function ToolPage({
   helpText,
   githubUrl,
   background = true,
+  headerImage,
   centered = false,
   className,
   ...rest
@@ -80,7 +91,9 @@ export function ToolPage({
 
   return (
     <div className={classes} {...rest}>
-      {background ? (
+      {headerImage ? (
+        <div className="vvp-ui-tool-page__header-image">{headerImage}</div>
+      ) : background ? (
         <div className="vvp-ui-tool-page__background" aria-hidden="true">
           <svg
             viewBox="0 0 1440 320"

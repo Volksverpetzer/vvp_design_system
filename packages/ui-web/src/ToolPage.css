@@ -19,6 +19,25 @@
   -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
 }
 
+/*
+ * Unlike __background, this sits in normal document flow (not absolutely
+ * positioned, full opacity) — a real banner image pushes the rest of the
+ * page down instead of sitting faintly behind it.
+ */
+.vvp-ui-tool-page__header-image {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.vvp-ui-tool-page__header-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .vvp-ui-tool-page__background svg {
   width: 100%;
   height: 100%;
