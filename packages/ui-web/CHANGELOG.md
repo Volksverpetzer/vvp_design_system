@@ -1,5 +1,17 @@
 # @volksverpetzer/ui-web
 
+## 0.12.1
+
+### Patch Changes
+
+- [#43](https://github.com/Volksverpetzer/vvp_design_system/pull/43) [`33ae4bc`](https://github.com/Volksverpetzer/vvp_design_system/commit/33ae4bc470bed2d4fe97ab4a7f5101d083f82da0) Thanks [@rejas](https://github.com/rejas)! - Fix Badge soft/tinted variants (primary, accent, error, pruefpunkt) failing WCAG 4.5:1 text contrast in dark mode. The light-mode background formula (`color-mix(... 15%, white)`) is theme-independent, so in dark mode it mixed the already-lightened dark-mode brand colors toward a near-white background they were never designed to sit on — contrast fell as low as ~2:1 for some variant/theme pairings.
+
+  Each variant's dark-mode background is now tuned to its own safe tint direction and percentage (primary/accent toward white, error/pruefpunkt toward black), verified against the WCAG contrast formula for both Volksverpetzer and Mimikama's dark palettes. Light mode is unchanged.
+
+- [#42](https://github.com/Volksverpetzer/vvp_design_system/pull/42) [`be79eec`](https://github.com/Volksverpetzer/vvp_design_system/commit/be79eec2a6088fc9fe589cc7a7cb6d9b5d4f2df0) Thanks [@rejas](https://github.com/rejas)! - Use the new `--vvp-link-text` token (from `@volksverpetzer/design-tokens`) instead of `--vvp-primary` for standalone text/link colors — `LinkButton`, `Button`'s ghost variant (text + border), and `ToolPage`'s header icon — fixing dark-mode contrast that had been compromised by `primary` also serving as a button-fill color.
+
+- [#40](https://github.com/Volksverpetzer/vvp_design_system/pull/40) [`351840c`](https://github.com/Volksverpetzer/vvp_design_system/commit/351840c8240406ac2086aa87261d39c56df4e3d5) Thanks [@rejas](https://github.com/rejas)! - Fix ThemeToggle blending into busy page backgrounds by giving it an explicit opaque background instead of the ghost button's default transparent one.
+
 ## 0.12.0
 
 ### Minor Changes
