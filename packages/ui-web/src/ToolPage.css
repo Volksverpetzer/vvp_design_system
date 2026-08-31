@@ -122,7 +122,7 @@
 .vvp-ui-tool-page__icon {
   display: inline-flex;
   align-items: center;
-  color: var(--vvp-primary, #1b7194);
+  color: var(--vvp-link-text, #1b7194);
 }
 
 .vvp-ui-tool-page__tags {

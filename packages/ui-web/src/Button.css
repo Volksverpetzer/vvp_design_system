@@ -56,8 +56,8 @@
 
 .vvp-ui-btn--ghost {
   background: transparent;
-  color: var(--vvp-primary, #1b7194);
-  border: 2px solid var(--vvp-primary, #1b7194);
+  color: var(--vvp-link-text, #1b7194);
+  border: 2px solid var(--vvp-link-text, #1b7194);
 }
 
 .vvp-ui-btn--ghost:hover:not(:disabled) {
