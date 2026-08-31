@@ -3,4 +3,13 @@
   top: var(--vvp-spacing-lg, 16px);
   right: var(--vvp-spacing-lg, 16px);
   z-index: 50;
+  /* Ghost buttons default to a transparent background, which disappears
+     against busy page backgrounds (e.g. crowdfunding.volksverpetzer.de).
+     The toggle floats over arbitrary host content, so it needs an
+     explicit, opaque background rather than inheriting the ghost variant's. */
+  background: var(--vvp-background, #fff);
+}
+
+.vvp-ui-theme-toggle:hover:not(:disabled) {
+  background: var(--vvp-surface, #e2f0f5);
 }
