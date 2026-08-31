@@ -13,7 +13,7 @@
 .vvp-ui-linkbtn {
   border-radius: var(--vvp-radius-md, 12px);
   background: transparent;
-  color: var(--vvp-primary, #1b7194);
+  color: var(--vvp-link-text, #1b7194);
   border: 1.5px solid var(--vvp-surface, #e2f0f5);
   box-shadow: var(
     --vvp-elevation-accent-rest,

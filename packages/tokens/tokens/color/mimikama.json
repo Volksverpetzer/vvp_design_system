@@ -12,6 +12,7 @@
       "onError": { "$value": "#FFF", "$type": "color" },
       "primary": { "$value": "#DB0301", "$type": "color" },
       "primaryMuted": { "$value": "#313131", "$type": "color" },
+      "linkText": { "$value": "#DB0301", "$type": "color" },
       "accent": { "$value": "#414141", "$type": "color" },
       "error": { "$value": "#B71C1C", "$type": "color" },
       "pruefpunkt": { "$value": "#442674", "$type": "color" }
@@ -24,10 +25,11 @@
       "surfaceError": { "$value": "#6E1111", "$type": "color" },
       "text": { "$value": "#E1C9E1", "$type": "color" },
       "textMuted": { "$value": "#AAA", "$type": "color" },
-      "onPrimary": { "$value": "#E1C9E1", "$type": "color" },
+      "onPrimary": { "$value": "#FFFFFF", "$type": "color" },
       "onError": { "$value": "#FEE2E2", "$type": "color" },
-      "primary": { "$value": "#DB0301", "$type": "color" },
+      "primary": { "$value": "#E00301", "$type": "color" },
       "primaryMuted": { "$value": "#E1C9E1", "$type": "color" },
+      "linkText": { "$value": "#FE5150", "$type": "color" },
       "accent": { "$value": "#757575", "$type": "color" },
       "error": { "$value": "#FF8A80", "$type": "color" },
       "pruefpunkt": { "$value": "#8B5CF6", "$type": "color" }
