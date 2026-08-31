@@ -1,6 +1,6 @@
 {
   "name": "@volksverpetzer/ui-web",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "description": "Shared brand-visible React components (Button, Badge, Card, ProgressBar, Input, Alert, Slider, ThemeToggle, InputButton) for vvp_link_shortener, vvp_divi5_extensions, crowdfunding, and vectorcrawl. Plain, hand-scoped CSS (vvp-ui-* class prefix) consuming the --vvp-* custom properties emitted by @volksverpetzer/design-tokens — no Tailwind classes, so it drops into a Tailwind app and Divi's WordPress-embedded CSS alike.",
   "type": "module",
   "license": "MIT",
