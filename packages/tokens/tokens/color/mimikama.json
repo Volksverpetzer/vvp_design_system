@@ -13,7 +13,7 @@
       "primary": { "$value": "#DB0301", "$type": "color" },
       "primaryMuted": { "$value": "#E8433E", "$type": "color" },
       "linkText": { "$value": "#DB0301", "$type": "color" },
-      "accent": { "$value": "#414141", "$type": "color" },
+      "accent": { "$value": "#4E5F6B", "$type": "color" },
       "error": { "$value": "#B71C1C", "$type": "color" },
       "pruefpunkt": { "$value": "#442674", "$type": "color" }
     },
@@ -30,7 +30,7 @@
       "primary": { "$value": "#E00301", "$type": "color" },
       "primaryMuted": { "$value": "#E85955", "$type": "color" },
       "linkText": { "$value": "#FE5150", "$type": "color" },
-      "accent": { "$value": "#757575", "$type": "color" },
+      "accent": { "$value": "#62727C", "$type": "color" },
       "error": { "$value": "#FF8A80", "$type": "color" },
       "pruefpunkt": { "$value": "#8B5CF6", "$type": "color" }
     }
