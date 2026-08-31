@@ -58,3 +58,31 @@
   background: color-mix(in srgb, var(--vvp-pruefpunkt, #442674) 15%, white);
   color: var(--vvp-pruefpunkt, #442674);
 }
+
+/*
+ * Dark mode: the light-mode formula above mixes toward literal `white`,
+ * which is theme-independent. Dark-mode brand colors are deliberately
+ * lightened for legibility on a near-black page, so mixed with `white` at
+ * 15% they lose too much contrast against their own text color (as low as
+ * ~2:1 for some variant/brand pairings, against a 4.5:1 requirement).
+ *
+ * Each variant below uses whichever tint direction and percentage clears
+ * 4.5:1 for both Volksverpetzer and Mimikama's dark palettes (verified with
+ * the WCAG contrast formula) — primary and accent read fine tinted toward
+ * white, error and pruefpunkt need black instead.
+ */
+.dark .vvp-ui-badge--primary {
+  background: color-mix(in srgb, var(--vvp-primary, #1b7194) 5%, white);
+}
+
+.dark .vvp-ui-badge--accent {
+  background: #fff;
+}
+
+.dark .vvp-ui-badge--error {
+  background: color-mix(in srgb, var(--vvp-error, #ef5350) 15%, black);
+}
+
+.dark .vvp-ui-badge--pruefpunkt {
+  background: color-mix(in srgb, var(--vvp-pruefpunkt, #8b5cf6) 10%, black);
+}
