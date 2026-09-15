@@ -1,5 +1,13 @@
 # @volksverpetzer/ui-web
 
+## 0.13.0
+
+### Minor Changes
+
+- [#45](https://github.com/Volksverpetzer/vvp_design_system/pull/45) [`a5071ae`](https://github.com/Volksverpetzer/vvp_design_system/commit/a5071aece98487a35d3084ead2359ebdd305b7bb) Thanks [@rejas](https://github.com/rejas)! - Add `PillGroup`, a row of pill-shaped options for choosing one of a small, fixed set of values — the web port of vvp_app's "pills over dropdowns" convention, as an alternative to a native `<select>`.
+
+  Implements the ARIA APG radiogroup pattern: one `role="radio"` pill per option, roving tabindex, and Left/Right/Up/Down arrow keys move both focus and selection. First consumer is vvp_reisekosten's upcoming Next.js frontend (transport method, meal coverage, and accommodation type selectors).
+
 ## 0.12.1
 
 ### Patch Changes
