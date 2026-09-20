@@ -1,5 +1,11 @@
 # @volksverpetzer/ui-web
 
+## 0.13.1
+
+### Patch Changes
+
+- [#48](https://github.com/Volksverpetzer/vvp_design_system/pull/48) [`b8c6a8f`](https://github.com/Volksverpetzer/vvp_design_system/commit/b8c6a8f38c80b4979e9d756c21e97df933dc5d67) Thanks [@rejas](https://github.com/rejas)! - Fix `ToolPage` content overlapping the decorative jagged background: add top spacing above the content slot when the background is shown.
+
 ## 0.13.0
 
 ### Minor Changes
