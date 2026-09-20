@@ -81,7 +81,13 @@ export function ToolPage({
   className,
   ...rest
 }: ToolPageProps) {
-  const classes = ["vvp-ui-tool-page", className].filter(Boolean).join(" ");
+  const classes = [
+    "vvp-ui-tool-page",
+    !headerImage && background && "vvp-ui-tool-page--with-background",
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
   const innerClasses = [
     "vvp-ui-tool-page__inner",
     centered && "vvp-ui-tool-page__inner--centered",
