@@ -132,6 +132,14 @@
   gap: var(--vvp-spacing-xs, 4px);
 }
 
+/*
+ * The decorative background is 220px tall and fades out; without extra space
+ * the content slot (a card, form, list) starts on top of the jagged edge.
+ */
+.vvp-ui-tool-page--with-background .vvp-ui-tool-page__content {
+  margin-top: var(--vvp-spacing-huge, 40px);
+}
+
 .vvp-ui-tool-page__content {
   width: 100%;
 }
