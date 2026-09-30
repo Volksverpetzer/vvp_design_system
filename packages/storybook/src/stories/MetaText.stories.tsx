@@ -19,8 +19,10 @@ export const InContext: Story = {
   name: "Under a title (typical usage)",
   render: (args) => (
     <div style={{ maxWidth: 320 }}>
-      <h3 style={{ margin: "0 0 4px" }}>Warum Katzenfotos mehr zählen</h3>
-      <MetaText {...args} />
+      <h3 style={{ margin: "0 0 var(--vvp-spacing-xs, 4px)" }}>
+        Warum Katzenfotos mehr zählen
+      </h3>
+      <MetaText as="p" style={{ margin: 0 }} {...args} />
     </div>
   ),
 };

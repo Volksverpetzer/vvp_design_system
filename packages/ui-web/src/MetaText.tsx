@@ -1,9 +1,14 @@
-import type { HTMLAttributes, ReactNode } from "react";
+import type { ElementType, HTMLAttributes, ReactNode } from "react";
 
 import "./MetaText.css";
 
-export interface MetaTextProps extends HTMLAttributes<HTMLSpanElement> {
+export interface MetaTextProps extends HTMLAttributes<HTMLElement> {
   children: ReactNode;
+  /**
+   * Element to render. Defaults to an inline `span`; use `p` or `div` when
+   * the line should sit on its own under a title.
+   */
+  as?: ElementType;
 }
 
 /**
@@ -14,12 +19,17 @@ export interface MetaTextProps extends HTMLAttributes<HTMLSpanElement> {
  * Mirrors vvp_app's `Typography type="meta"` role, which resolves to the
  * same --vvp-text-muted token.
  */
-export function MetaText({ className, children, ...rest }: MetaTextProps) {
+export function MetaText({
+  as: Component = "span",
+  className,
+  children,
+  ...rest
+}: MetaTextProps) {
   const classes = ["vvp-ui-meta-text", className].filter(Boolean).join(" ");
 
   return (
-    <span className={classes} {...rest}>
+    <Component className={classes} {...rest}>
       {children}
-    </span>
+    </Component>
   );
 }
