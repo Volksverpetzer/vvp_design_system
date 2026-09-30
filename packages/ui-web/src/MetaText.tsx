@@ -1,15 +1,16 @@
-import type { ElementType, HTMLAttributes, ReactNode } from "react";
+import type { ComponentPropsWithoutRef, ElementType, ReactNode } from "react";
 
 import "./MetaText.css";
 
-export interface MetaTextProps extends HTMLAttributes<HTMLElement> {
+export type MetaTextProps<T extends ElementType = "span"> = {
   children: ReactNode;
   /**
    * Element to render. Defaults to an inline `span`; use `p` or `div` when
-   * the line should sit on its own under a title.
+   * the line should sit on its own under a title. Remaining props are typed
+   * for the chosen element.
    */
-  as?: ElementType;
-}
+  as?: T;
+} & Omit<ComponentPropsWithoutRef<T>, "as" | "children">;
 
 /**
  * Secondary info line — author, date, duration, reading time, category.
@@ -19,12 +20,13 @@ export interface MetaTextProps extends HTMLAttributes<HTMLElement> {
  * Mirrors vvp_app's `Typography type="meta"` role, which resolves to the
  * same --vvp-text-muted token.
  */
-export function MetaText({
-  as: Component = "span",
+export function MetaText<T extends ElementType = "span">({
+  as,
   className,
   children,
   ...rest
-}: MetaTextProps) {
+}: MetaTextProps<T>) {
+  const Component: ElementType = as ?? "span";
   const classes = ["vvp-ui-meta-text", className].filter(Boolean).join(" ");
 
   return (
