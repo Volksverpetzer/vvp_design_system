@@ -1,0 +1,5 @@
+.vvp-ui-meta-text {
+  font-size: var(--vvp-font-size-sm, 14px);
+  color: var(--vvp-text-muted, #666);
+  line-height: 1.4;
+}
