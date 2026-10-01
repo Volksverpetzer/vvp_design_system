@@ -1,5 +1,13 @@
 # @volksverpetzer/ui-web
 
+## 0.14.0
+
+### Minor Changes
+
+- [#50](https://github.com/Volksverpetzer/vvp_design_system/pull/50) [`f2155e1`](https://github.com/Volksverpetzer/vvp_design_system/commit/f2155e17192c3f337fd74013ad64c069bc719b98) Thanks [@rejas](https://github.com/rejas)! - Add `MetaText` component: secondary info line (author, date, duration, reading time, category) in the small size and muted text color. Renders a `span` by default; use `as` to change the element.
+
+- [#52](https://github.com/Volksverpetzer/vvp_design_system/pull/52) [`182d73e`](https://github.com/Volksverpetzer/vvp_design_system/commit/182d73eec26648678ff19a2fac845f534f46f098) Thanks [@rejas](https://github.com/rejas)! - Vendor the house webfont (Source Sans Pro, weights 400/600/700 plus italics) at build time from `@fontsource/source-sans-pro` into `dist/fonts/`, and prepend its `@font-face` CSS to `dist/styles.css`. Consumers that already `@import "@volksverpetzer/ui-web/styles.css"` get the real font with no further changes; the separate `@fontsource/source-sans-pro` dependency and per-weight CSS imports in each app's root layout can be dropped. `@volksverpetzer/design-tokens`'s `font-family.css` still just names the font via `--vvp-font-family` — this is what actually makes that name resolve to loaded glyphs instead of falling back to `system-ui`.
+
 ## 0.13.1
 
 ### Patch Changes
