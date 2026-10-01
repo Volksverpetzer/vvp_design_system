@@ -3,7 +3,7 @@
 // and also concatenates everything into dist/styles.css as a single
 // convenience import for consumers that prefer to load styles once.
 //
-// Also vendors the house webfont (Source Sans Pro, weights 400/600/700) from
+// Also vendors the house webfont (Source Sans Pro, weights 400/600/700 plus italics) from
 // @fontsource/source-sans-pro — a build-time-only devDependency — into
 // dist/fonts/, and prepends its rewritten @font-face CSS to dist/styles.css.
 // This is what lets consumers get the actual font just by importing
@@ -24,7 +24,15 @@ const require = createRequire(import.meta.url);
 
 const srcDir = "src";
 const distDir = "dist";
-const fontWeights = ["400", "600", "700"];
+// Each entry is a fontsource CSS file: upright weights, then their italics.
+const fontVariants = [
+  "400",
+  "600",
+  "700",
+  "400-italic",
+  "600-italic",
+  "700-italic",
+];
 
 function bundleFont() {
   const fontDistDir = join(distDir, "fonts");
@@ -39,10 +47,10 @@ function bundleFont() {
   // package that happens to depend on them.
   copyFileSync(join(fontPackageDir, "LICENSE"), join(fontDistDir, "OFL.txt"));
 
-  let fontCss = `/*\n * Source Sans Pro, vendored at build time from\n * @fontsource/source-sans-pro (SIL Open Font License 1.1 -- see\n * ./fonts/OFL.txt). Weights: ${fontWeights.join(", ")}. woff2 only --\n * every browser this app supports has shipped woff2 support since 2016,\n * so the legacy woff fallback @fontsource also ships is dropped.\n */\n`;
+  let fontCss = `/*\n * Source Sans Pro, vendored at build time from\n * @fontsource/source-sans-pro (SIL Open Font License 1.1 -- see\n * ./fonts/OFL.txt). Variants: ${fontVariants.join(", ")}. woff2 only --\n * every browser this app supports has shipped woff2 support since 2016,\n * so the legacy woff fallback @fontsource also ships is dropped.\n */\n`;
 
-  for (const weight of fontWeights) {
-    const weightCssPath = join(fontPackageDir, `${weight}.css`);
+  for (const variant of fontVariants) {
+    const weightCssPath = join(fontPackageDir, `${variant}.css`);
     const css = readFileSync(weightCssPath, "utf8");
 
     // Each rule's `src` lists a woff2 and a woff url(); drop the woff
@@ -67,7 +75,7 @@ function bundleFont() {
 
   writeFileSync(join(distDir, "fonts.css"), fontCss);
   console.log(
-    `Vendored ${fontWeights.length} font weights into dist/fonts/, wrote dist/fonts.css.`,
+    `Vendored ${fontVariants.length} font variants into dist/fonts/, wrote dist/fonts.css.`,
   );
   return fontCss;
 }
