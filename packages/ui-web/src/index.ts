@@ -23,3 +23,4 @@ export {
   type PillGroupOption,
 } from "./PillGroup";
 export { ToolPage, type ToolPageProps, type ToolPageTag } from "./ToolPage";
+export { MetaText, type MetaTextProps } from "./MetaText";

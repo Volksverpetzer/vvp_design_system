@@ -4,3 +4,4 @@ gen-rn/
 *.tsbuildinfo
 *.tgz
 .DS_Store
+.claude/

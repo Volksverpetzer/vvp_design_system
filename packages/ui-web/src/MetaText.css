@@ -1,0 +1,10 @@
+.vvp-ui-meta-text {
+  font-size: var(--vvp-font-size-sm, 14px);
+  color: var(--vvp-text-muted, #666);
+  line-height: 1.4;
+}
+
+/* Fallback only (used when the token is undefined): #666 is too dark on dark surfaces. */
+.dark .vvp-ui-meta-text {
+  color: var(--vvp-text-muted, #a0a0a0);
+}
