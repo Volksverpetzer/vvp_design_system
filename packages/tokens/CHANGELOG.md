@@ -1,5 +1,11 @@
 # @volksverpetzer/design-tokens
 
+## 0.9.0
+
+### Minor Changes
+
+- [#53](https://github.com/Volksverpetzer/vvp_design_system/pull/53) [`c5d0de5`](https://github.com/Volksverpetzer/vvp_design_system/commit/c5d0de5000c2005635548fa51067c1407b7c6ee7) Thanks [@rejas](https://github.com/rejas)! - Add an `iconSubtle` color token (`#8B8B8B`, identical in light and dark, both brands). It sits between `textMuted` light (`[#666](https://github.com/Volksverpetzer/vvp_design_system/issues/666)`) and dark (`#AAA`), and replaces the scattered one-off mid-greys (`[#808080](https://github.com/Volksverpetzer/vvp_design_system/issues/808080)`, `[#888](https://github.com/Volksverpetzer/vvp_design_system/issues/888)`, `[#999](https://github.com/Volksverpetzer/vvp_design_system/issues/999)`) found across the apps. Intended for icons and other non-text UI such as inactive indicators (about 3.4:1 on white, enough for the 3:1 non-text minimum), not for body text — use `textMuted` for that.
+
 ## 0.8.0
 
 ### Minor Changes
