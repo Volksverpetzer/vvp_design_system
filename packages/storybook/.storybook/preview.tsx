@@ -4,11 +4,28 @@ import { useEffect } from "react";
 
 import volksverpetzerCss from "@volksverpetzer/design-tokens/css/volksverpetzer.css?raw";
 import mimikamaCss from "@volksverpetzer/design-tokens/css/mimikama.css?raw";
+import elevationCss from "@volksverpetzer/design-tokens/css/elevation.css?raw";
+import elevationAccentCss from "@volksverpetzer/design-tokens/css/elevation-accent.css?raw";
+import fontSizeCss from "@volksverpetzer/design-tokens/css/font-size.css?raw";
+import iconSizeCss from "@volksverpetzer/design-tokens/css/icon-size.css?raw";
+import radiusCss from "@volksverpetzer/design-tokens/css/radius.css?raw";
+import spacingCss from "@volksverpetzer/design-tokens/css/spacing.css?raw";
 
 const BRAND_CSS: Record<string, string> = {
   volksverpetzer: volksverpetzerCss,
   mimikama: mimikamaCss,
 };
+
+// Brand-independent scales; the components reference these with fallbacks,
+// so without loading them stories would silently render on the fallbacks.
+const SHARED_CSS = [
+  spacingCss,
+  radiusCss,
+  fontSizeCss,
+  iconSizeCss,
+  elevationCss,
+  elevationAccentCss,
+].join("\n");
 
 const TOKENS_STYLE_ID = "vvp-tokens";
 
@@ -30,7 +47,7 @@ function TokensProvider({
       style.id = TOKENS_STYLE_ID;
       document.head.appendChild(style);
     }
-    style.textContent = BRAND_CSS[brand] ?? BRAND_CSS.volksverpetzer;
+    style.textContent = `${BRAND_CSS[brand] ?? BRAND_CSS.volksverpetzer}\n${SHARED_CSS}`;
 
     document.documentElement.classList.toggle("dark", scheme === "dark");
     document.body.style.background = "var(--vvp-background)";
