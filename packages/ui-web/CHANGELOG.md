@@ -1,5 +1,11 @@
 # @volksverpetzer/ui-web
 
+## 0.15.0
+
+### Minor Changes
+
+- [#60](https://github.com/Volksverpetzer/vvp_design_system/pull/60) [`b6a6b9b`](https://github.com/Volksverpetzer/vvp_design_system/commit/b6a6b9b34c7c0297c2e789a697cf53ee9d2cd1dd) Thanks [@rejas](https://github.com/rejas)! - ThemeToggle now renders its sun and moon icons from `lucide-react` (new dependency) instead of hand-copied inline SVGs.
+
 ## 0.14.0
 
 ### Minor Changes
