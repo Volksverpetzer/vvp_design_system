@@ -39,7 +39,8 @@
   },
   "scripts": {
     "build": "node build.mjs && node scripts/write-index-files.mjs && tsc -p tsconfig.rn.json",
-    "check:ts": "tsc --noEmit -p tsconfig.rn.json"
+    "check:ts": "tsc --noEmit -p tsconfig.rn.json",
+    "test": "node --test \"test/**/*.test.mjs\""
   },
   "devDependencies": {
     "style-dictionary": "^5.6.1",
