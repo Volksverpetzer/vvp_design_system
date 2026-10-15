@@ -10,15 +10,6 @@ const SCHEMES = ["light", "dark"];
 const SURFACES = ["background", "surface"];
 const WCAG_AA_TEXT = 4.5;
 
-// Known pre-existing failures, reported as `todo` so they stay visible in the
-// test output without failing CI. Remove an entry once the palette is fixed.
-const KNOWN_FAILURES = {
-  // #DB0301 on #EEE is 4.496:1 — rounds to 4.50 but misses AA. Light mode
-  // deliberately keeps linkText === primary, so fixing it is a palette call.
-  "mimikama/light/surface":
-    "Mimikama light linkText on surface is 4.496:1 (pre-existing)",
-};
-
 function loadColors(brand) {
   const url = new URL(`../tokens/color/${brand}.json`, import.meta.url);
   return JSON.parse(readFileSync(url, "utf8")).color;
@@ -58,9 +49,8 @@ for (const brand of BRANDS) {
     for (const surface of SURFACES) {
       const fg = colors[scheme].linkText.$value;
       const bg = colors[scheme][surface].$value;
-      const todo = KNOWN_FAILURES[`${brand}/${scheme}/${surface}`];
       const name = `${brand} ${scheme}: linkText ${fg} on ${surface} ${bg} ≥ ${WCAG_AA_TEXT}:1`;
-      test(name, { todo }, () => {
+      test(name, () => {
         const ratio = contrastRatio(fg, bg);
         assert.ok(
           ratio >= WCAG_AA_TEXT,
