@@ -36,6 +36,9 @@ jobs:
       - name: ✅ Check types
         run: pnpm check:ts
 
+      - name: 🧪 Run tests
+        run: pnpm test
+
       - name: 🏃‍♀️ Run linter
         run: pnpm lint
 

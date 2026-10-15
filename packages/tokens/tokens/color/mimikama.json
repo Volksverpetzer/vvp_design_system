@@ -31,7 +31,7 @@
       "onError": { "$value": "#FEE2E2", "$type": "color" },
       "primary": { "$value": "#E00301", "$type": "color" },
       "primaryMuted": { "$value": "#E85955", "$type": "color" },
-      "linkText": { "$value": "#FE5150", "$type": "color" },
+      "linkText": { "$value": "#FF7A78", "$type": "color" },
       "accent": { "$value": "#62727C", "$type": "color" },
       "error": { "$value": "#FF8A80", "$type": "color" },
       "pruefpunkt": { "$value": "#8B5CF6", "$type": "color" }
