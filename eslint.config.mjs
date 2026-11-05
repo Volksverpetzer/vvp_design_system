@@ -1,8 +1,7 @@
 import js from "@eslint/js";
 import globals from "globals";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
-import tsPlugin from "@typescript-eslint/eslint-plugin";
-import tsParser from "@typescript-eslint/parser";
+import tseslint from "typescript-eslint";
 import reactPlugin from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 
@@ -16,11 +15,11 @@ export default [
     },
   },
   js.configs.recommended,
-  ...tsPlugin.configs["flat/recommended"],
+  ...tseslint.configs.recommended,
   {
     files: ["**/*.{ts,tsx}"],
     languageOptions: {
-      parser: tsParser,
+      parser: tseslint.parser,
     },
     rules: {
       "@typescript-eslint/no-explicit-any": "off",
