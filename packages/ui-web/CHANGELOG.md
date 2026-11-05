@@ -1,5 +1,11 @@
 # @volksverpetzer/ui-web
 
+## 0.16.0
+
+### Minor Changes
+
+- [#68](https://github.com/Volksverpetzer/vvp_design_system/pull/68) [`50669be`](https://github.com/Volksverpetzer/vvp_design_system/commit/50669be5e8c4baa402db5cd7650bb351b2f7a656) Thanks [@rejas](https://github.com/rejas)! - Add `Field`: label + control + optional hint/error, stacked, so apps stop hand-rolling `.field` CSS for their forms. With `htmlFor` it renders a `<label>` and links the hint/error to the control via `aria-describedby` (and sets `aria-invalid` when `error` is given). Without `htmlFor`, for composite controls, the label is a `<span>` with `labelId`. `PillGroup` gains an `aria-labelledby` prop to pair with it.
+
 ## 0.15.0
 
 ### Minor Changes
