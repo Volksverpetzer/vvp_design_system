@@ -1,0 +1,36 @@
+/*
+ * Matches the `.field` styles vvp_tools' reisekosten and signatur apps had
+ * hand-rolled before this component existed: bold muted label, xs gap,
+ * hint in the muted text color.
+ */
+.vvp-ui-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--vvp-spacing-xs, 4px);
+  min-width: 0;
+}
+
+.vvp-ui-field__label {
+  font-weight: 700;
+  color: var(--vvp-text-muted, #666);
+}
+
+.vvp-ui-field__hint,
+.vvp-ui-field__error {
+  font-size: var(--vvp-font-size-sm, 14px);
+  line-height: 1.4;
+}
+
+.vvp-ui-field__hint {
+  color: var(--vvp-text-muted, #666);
+}
+
+.vvp-ui-field__error {
+  color: var(--vvp-error, #c62828);
+}
+
+/* Fallback only (used when the token is undefined): #666 is too dark on dark surfaces. */
+.dark .vvp-ui-field__label,
+.dark .vvp-ui-field__hint {
+  color: var(--vvp-text-muted, #a0a0a0);
+}
