@@ -12,6 +12,8 @@ export interface PillGroupOption {
 export interface PillGroupProps {
   /** Visually hidden unless `label` is also rendered by the consumer via `aria-labelledby` — falls back to this as the accessible name. */
   "aria-label"?: string;
+  /** `id` of a visible label, e.g. `Field`'s `labelId`. Takes precedence over `aria-label`. */
+  "aria-labelledby"?: string;
   options: PillGroupOption[];
   value: string;
   onChange: (value: string) => void;
@@ -30,6 +32,7 @@ export interface PillGroupProps {
  */
 export function PillGroup({
   "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
   options,
   value,
   onChange,
@@ -71,6 +74,7 @@ export function PillGroup({
     <div
       role="radiogroup"
       aria-label={ariaLabel}
+      aria-labelledby={ariaLabelledBy}
       className={classes}
       data-size={size}
     >
