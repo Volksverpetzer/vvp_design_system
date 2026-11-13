@@ -2,15 +2,6 @@ packages:
   - "packages/*"
 allowBuilds:
   esbuild: true
-minimumReleaseAgeExclude:
-  - lucide-react@1.69.0
-  - "@storybook/addon-docs@10.6.6"
-  - "@storybook/builder-vite@10.6.6"
-  - "@storybook/react-dom-shim@10.6.6"
-  - "@storybook/react-vite@10.6.6"
-  - "@storybook/react@10.6.6"
-  - storybook@10.6.6
-  - vite@8.3.6
 overrides:
   # GHSA-3g3m-2fjr-6pw4: style-dictionary (via @bundled-es-modules/glob) and
   # Storybook's react-docgen plugin still depend on glob 13. Drop this once
