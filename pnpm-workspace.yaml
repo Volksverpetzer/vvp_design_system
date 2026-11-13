@@ -11,3 +11,12 @@ minimumReleaseAgeExclude:
   - "@storybook/react@10.6.6"
   - storybook@10.6.6
   - vite@8.3.6
+overrides:
+  # GHSA-3g3m-2fjr-6pw4: style-dictionary (via @bundled-es-modules/glob) and
+  # Storybook's react-docgen plugin still depend on glob 13. Drop this once
+  # both ship glob >=14.0.2.
+  "glob@>=9.0.0 <=14.0.1": "^14.0.2"
+  # GHSA-g3hv-75wg-m249: @typescript-eslint/typescript-estree 8.72.x still asks
+  # for minimatch ^10 (it only calls minimatch(path, pattern, { dot: true }),
+  # unchanged in 11). Drop once typescript-eslint moves to minimatch 11.
+  "minimatch@>=7.0.0 <11.0.1": "^11.0.1"
