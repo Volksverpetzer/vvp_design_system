@@ -14,6 +14,7 @@ export {
 } from "./ProgressBar";
 export { Input, type InputProps } from "./Input";
 export { Alert, type AlertProps, type AlertVariant } from "./Alert";
+export { Callout, type CalloutProps, type CalloutVariant } from "./Callout";
 export { Slider, type SliderProps } from "./Slider";
 export { ThemeToggle } from "./ThemeToggle";
 export { InputButton, type InputButtonProps } from "./InputButton";

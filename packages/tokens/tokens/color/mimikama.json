@@ -16,6 +16,8 @@
       "linkText": { "$value": "#D40201", "$type": "color" },
       "accent": { "$value": "#4E5F6B", "$type": "color" },
       "error": { "$value": "#B71C1C", "$type": "color" },
+      "warning": { "$value": "#9A5B00", "$type": "color" },
+      "success": { "$value": "#2B7330", "$type": "color" },
       "pruefpunkt": { "$value": "#442674", "$type": "color" }
     },
     "dark": {
@@ -34,6 +36,8 @@
       "linkText": { "$value": "#FF7A78", "$type": "color" },
       "accent": { "$value": "#62727C", "$type": "color" },
       "error": { "$value": "#FF8A80", "$type": "color" },
+      "warning": { "$value": "#E0A84A", "$type": "color" },
+      "success": { "$value": "#66BB6A", "$type": "color" },
       "pruefpunkt": { "$value": "#8B5CF6", "$type": "color" }
     }
   }

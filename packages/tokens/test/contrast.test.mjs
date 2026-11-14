@@ -60,3 +60,27 @@ for (const brand of BRANDS) {
     }
   }
 }
+
+// Feedback colors (error, warning, success) are used as text, icons and the
+// accent stripe of ui-web's Callout, on both surfaces: same AA text bar as
+// linkText, which also covers the 3:1 non-text minimum for the stripe.
+const FEEDBACK = ["error", "warning", "success"];
+
+for (const brand of BRANDS) {
+  const colors = loadColors(brand);
+  for (const scheme of SCHEMES) {
+    for (const role of FEEDBACK) {
+      for (const surface of SURFACES) {
+        const fg = colors[scheme][role].$value;
+        const bg = colors[scheme][surface].$value;
+        test(`${brand} ${scheme}: ${role} ${fg} on ${surface} ${bg} ≥ ${WCAG_AA_TEXT}:1`, () => {
+          const ratio = contrastRatio(fg, bg);
+          assert.ok(
+            ratio >= WCAG_AA_TEXT,
+            `${brand} ${scheme} ${role} ${fg} on ${surface} ${bg} is ${ratio.toFixed(3)}:1, needs ≥ ${WCAG_AA_TEXT}:1`,
+          );
+        });
+      }
+    }
+  }
+}
