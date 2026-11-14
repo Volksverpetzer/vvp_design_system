@@ -1,5 +1,11 @@
 # @volksverpetzer/design-tokens
 
+## 0.10.0
+
+### Minor Changes
+
+- [#72](https://github.com/Volksverpetzer/vvp_design_system/pull/72) [`d192680`](https://github.com/Volksverpetzer/vvp_design_system/commit/d19268052e96dda3a567defd22f3cf6a68120e79) Thanks [@rejas](https://github.com/rejas)! - Add `warning` and `success` color tokens (both brands, light and dark; all feedback colors are now guarded to reach WCAG AA on background and surface) and a `Callout` component in ui-web: a highlighted note inside running text with a colored stripe on the left and a light tint (`info`, `warning`, `success`, `error`, optional icon). The same look is used by vvp_app's article renderer and by the legacy WPBakery message boxes on the website.
+
 ## 0.9.1
 
 ### Patch Changes
