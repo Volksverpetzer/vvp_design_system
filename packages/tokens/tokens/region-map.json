@@ -1,0 +1,8 @@
+{
+  "regionMap": {
+    "top": { "$value": "#DB2685", "$type": "color", "$description": "Top quartile (\"Vorreiter\")." },
+    "aboveAverage": { "$value": "#EE8FBE", "$type": "color", "$description": "Second quartile (\"Überdurchschnittlich\")." },
+    "belowAverage": { "$value": "#3893C0", "$type": "color", "$description": "Third quartile (\"Unterdurchschnittlich\")." },
+    "bottom": { "$value": "#1B7194", "$type": "color", "$description": "Bottom quartile (\"Schlusslicht\")." }
+  }
+}

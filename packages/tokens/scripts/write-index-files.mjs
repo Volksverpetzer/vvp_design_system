@@ -8,6 +8,7 @@ export * from "./FontFamily";
 export * from "./BorderRadius";
 export * from "./IconSizes";
 export * from "./Elevation";
+export * from "./RegionMap";
 `,
 );
 
