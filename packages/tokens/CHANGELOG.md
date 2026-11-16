@@ -1,5 +1,11 @@
 # @volksverpetzer/design-tokens
 
+## 0.11.0
+
+### Minor Changes
+
+- [#74](https://github.com/Volksverpetzer/vvp_design_system/pull/74) [`68fabe7`](https://github.com/Volksverpetzer/vvp_design_system/commit/68fabe7f4e3b1c26f08028b1a7408b9e5eabf6d0) Thanks [@rejas](https://github.com/rejas)! - Add `regionMapColors` (RN, `rn/shared`) and `--vvp-region-map-*` (CSS, `css/region-map.css`): the four quartile colors of the region map, highest first. They match the server-rendered `/proxy/map` image and its legend in the app.
+
 ## 0.10.0
 
 ### Minor Changes
