@@ -71,6 +71,14 @@ size, not from this scale.
 
 Source of truth: vvp_design_system/packages/tokens/tokens/radius.json`;
 
+const REGION_MAP_HEADER = `Quartile colors of the region map, highest quartile first.
+
+The map is a fixed image (rendered by vvp_app_server's \`/proxy/map\`) shown
+the same in light and dark mode, so these colors don't follow the color
+scheme. The server and the app's legend must use exactly these values.
+
+Source of truth: vvp_design_system/packages/tokens/tokens/region-map.json`;
+
 const ICON_SIZE_HEADER = `Central icon-size scale for the app.
 
 Every icon \`size\` prop should come from this scale so icons read as one
@@ -355,6 +363,15 @@ await buildScale({
   cssPrefix: "radius",
   cssUnit: "px",
   scss: true,
+});
+
+await buildScale({
+  source: "tokens/region-map.json",
+  exportName: "regionMapColors",
+  typeName: "RegionMapTier",
+  headerText: REGION_MAP_HEADER,
+  rnFile: "RegionMap.ts",
+  cssPrefix: "region-map",
 });
 
 await buildIconSizes();
