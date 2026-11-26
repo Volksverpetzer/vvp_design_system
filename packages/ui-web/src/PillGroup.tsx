@@ -69,6 +69,13 @@ export function PillGroup({
   };
 
   const classes = ["vvp-ui-pill-group", className].filter(Boolean).join(" ");
+  // Roving tabindex: the checked pill is the group's tab stop. With none
+  // checked (e.g. a "custom amount" field elsewhere is active), the first
+  // enabled pill is, so keyboard users can still reach the group (APG).
+  const hasChecked = options.some(
+    (option) => option.value === value && !option.disabled,
+  );
+  const firstEnabled = options.findIndex((option) => !option.disabled);
 
   return (
     <div
@@ -88,7 +95,7 @@ export function PillGroup({
             role="radio"
             aria-checked={checked}
             disabled={disabled || option.disabled}
-            tabIndex={checked ? 0 : -1}
+            tabIndex={checked || (!hasChecked && i === firstEnabled) ? 0 : -1}
             className="vvp-ui-pill-group__option"
             onClick={() => onChange(option.value)}
             onKeyDown={(e) => handleKeyDown(e, i)}
