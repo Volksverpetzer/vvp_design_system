@@ -1,5 +1,11 @@
 # @volksverpetzer/design-tokens
 
+## 0.12.0
+
+### Minor Changes
+
+- [#77](https://github.com/Volksverpetzer/vvp_design_system/pull/77) [`7d10d14`](https://github.com/Volksverpetzer/vvp_design_system/commit/7d10d14e9ee21b699ea1b8762fe24d54f17337f6) Thanks [@rejas](https://github.com/rejas)! - New colour token `surfaceAccent` (`--vvp-surface-accent`, `--vvp-color-surface-accent` / `--brand-surface-accent`): the light tint of `accent`, the way `surface` is the light tint of `primary`. Volksverpetzer light `#F5E2EC` (from design, for the donation progress bar track and the amount pills' borders), dark `[#281422](https://github.com/Volksverpetzer/vvp_design_system/issues/281422)`; Mimikama light `#E4E7E9`, dark `#2B2D2F`.
+
 ## 0.11.0
 
 ### Minor Changes
