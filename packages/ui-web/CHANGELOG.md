@@ -1,5 +1,11 @@
 # @volksverpetzer/ui-web
 
+## 0.17.1
+
+### Patch Changes
+
+- [#77](https://github.com/Volksverpetzer/vvp_design_system/pull/77) [`7d10d14`](https://github.com/Volksverpetzer/vvp_design_system/commit/7d10d14e9ee21b699ea1b8762fe24d54f17337f6) Thanks [@rejas](https://github.com/rejas)! - PillGroup: when no option is checked, the first enabled option is the group's tab stop, so keyboard users can still reach the group (before, every option had `tabIndex=-1`).
+
 ## 0.17.0
 
 ### Minor Changes
